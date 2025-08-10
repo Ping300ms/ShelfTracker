@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Ping300ms/ShelfTracker/sw.js', { scope: '/Ping300ms/ShelfTracker/' })})}
