@@ -12,17 +12,18 @@ export default defineConfig({
         name: 'ShelfTracker',
         short_name: 'ShelfTracker',
         start_url: '/ShelfTracker/',
+        scope: '/ShelfTracker/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#0a74da',
         icons: [
           {
-            src: '/ShelfTracker/icons/icon-192x192.png',
+            src: 'icons/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/ShelfTracker/icons/icon-512x512.png',
+            src: 'icons/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }

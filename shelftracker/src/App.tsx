@@ -1,6 +1,6 @@
 // src/App.tsx
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ProtectedRoute } from "./components/PrivateRoute";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
 import { AuthProvider } from "./context/AuthContext";
 
 import LoginScreen from "./screens/LoginScreen";
@@ -14,12 +14,14 @@ export default function App() {
                 <Routes>
                     <Route path="/ShelfTracker/login" element={<LoginScreen />} />
                     <Route path="/ShelfTracker/signup" element={<SignupScreen/>} />
+                    <Route path="/ShelftTracker" element={<HomeScreen />} />
 
+                    {/*
                     <Route element={<ProtectedRoute />}>
                         <Route path="/ShelftTracker" element={<HomeScreen />} />
-                    </Route>
+                    </Route>*/}
 
-                    <Route path="*" element={<Navigate to="/ShelfTracker/login" replace />} />
+                    {/*<Route path="*" element={<Navigate to="/ShelfTracker/login" replace />} />*/}
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

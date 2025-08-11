@@ -1,20 +1,22 @@
-import { useAuth } from "../hooks/AuthHook";
 import { LoginForm } from "../components/LoginForm";
 import { NavLink } from "react-router-dom";
+import "../styles/Glass.css";
 
 function LoginScreen() {
-    const { loading } = useAuth();
-
-    if (loading) return <div>Chargement...</div>;
-
-        return (
-            <div>
-                <LoginForm/>
-                <NavLink to="/ShelfTracker/signup" end>
-                    S'inscrire
-                </NavLink>
+    return (
+        <div className="root">
+            <div className="card">
+                <h2 className="title">Connexion</h2>
+                <LoginForm />
+                <div className="footer">
+                    <span>Pas de compte ?</span>
+                    <NavLink className="link" to="/ShelfTracker/signup" end>
+                        S'inscrire
+                    </NavLink>
+                </div>
             </div>
-        );
+        </div>
+    );
 }
 
 export default LoginScreen;
