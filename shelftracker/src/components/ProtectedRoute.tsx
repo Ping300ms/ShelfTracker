@@ -1,3 +1,4 @@
+// ProtectedRoute.tsx
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthHook";
 
@@ -9,7 +10,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const { user, loading } = useAuth();
 
     if (loading) {
-        return <div>Chargement...</div>;
+        return <div>Chargement...</div>; // ou un spinner
     }
 
     if (!user) {
