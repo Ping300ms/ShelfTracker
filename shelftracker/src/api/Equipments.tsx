@@ -1,9 +1,14 @@
 import { supabase } from './SupabaseClient';
-import type { Equipment } from '../types/Equipment';
+import type {Equipment, NewEquipment} from '../types/Equipment';
 
+const dbName: string = "equipments";
+
+/**
+ * Récupère tous les équipements
+ */
 export const getEquipments = async (): Promise<Equipment[]> => {
     const { data, error } = await supabase
-        .from("Equipments")
+        .from(dbName)
         .select("*")
         .order("name", { ascending: true });
 
@@ -11,9 +16,12 @@ export const getEquipments = async (): Promise<Equipment[]> => {
     return data ?? [];
 };
 
+/**
+ * Récupère un équipement par id
+ */
 export const getEquipmentById = async (id: number): Promise<Equipment | null> => {
     const { data, error } = await supabase
-        .from('Equipments')
+        .from(dbName)
         .select('*')
         .eq('id', id)
         .single();
@@ -22,11 +30,14 @@ export const getEquipmentById = async (id: number): Promise<Equipment | null> =>
     return data;
 };
 
+/**
+ * Créer un équipement
+ */
 export const createEquipment = async (
-    equipment: Omit<Equipment, 'id' | 'created_at'>
+    equipment: NewEquipment
 ): Promise<Equipment> => {
     const { data, error } = await supabase
-        .from('Equipments')
+        .from(dbName)
         .insert(equipment)
         .single();
 
@@ -34,36 +45,28 @@ export const createEquipment = async (
     return data;
 };
 
-export const updateEquipmentBooking = async (
-    id: number,
-    booking_start: string,
-    booking_end: string,
-    booker: string
+/**
+ * Applique les modifications d'un équipement
+ */
+export const updateEquipment = async (
+    updatedEquipment: Equipment
 ): Promise<Equipment> => {
     const { data, error } = await supabase
-        .from('Equipments')
-        .update({ booking_start, booking_end, booker })
-        .eq('id', id)
+        .from(dbName)
+        .update(updatedEquipment)
+        .eq('id', updatedEquipment.id)
         .single();
 
     if (error) throw error;
     return data;
 };
 
-export const clearEquipmentBooking = async (id: number): Promise<Equipment> => {
-    const { data, error } = await supabase
-        .from('Equipments')
-        .update({ booking_start: null, booking_end: null, booker: null })
-        .eq('id', id)
-        .single();
-
-    if (error) throw error;
-    return data;
-};
-
+/**
+ * Supprime un équipement
+ */
 export const deleteEquipment = async (id: number): Promise<void> => {
     const { error } = await supabase
-        .from('Equipments')
+        .from(dbName)
         .delete()
         .eq('id', id);
 
