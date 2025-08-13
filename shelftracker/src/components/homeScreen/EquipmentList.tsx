@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getEquipments } from '../api/Equipments';
-import type { Equipment } from '../types/Equipment';
+import { getEquipments } from '../../api/EquipmentsApi.ts';
+import type { Equipment } from '../../types/Equipment.tsx';
 
 export const EquipmentList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
@@ -33,11 +33,6 @@ export const EquipmentList = () => {
                 {equipments.map(eq => (
                     <li key={eq.id}>
                         <strong>{eq.name}</strong> — {eq.location ?? 'Emplacement inconnu'}
-                        {eq.booking_start && eq.booking_end && (
-                            <span style={{ color: 'orange' }}>
-                                {' '}• Réservé du {new Date(eq.booking_start).toLocaleDateString()} au {new Date(eq.booking_end).toLocaleDateString()}
-                            </span>
-                        )}
                     </li>
                 ))}
             </ul>

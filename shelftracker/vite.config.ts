@@ -13,7 +13,7 @@ export default defineConfig({
         short_name: 'ShelfTracker',
         start_url: '/ShelfTracker/',
         scope: '/ShelfTracker/',
-        display: 'standalone',
+        display: 'fullscreen',
         background_color: '#ffffff',
         theme_color: '#0a74da',
         icons: [

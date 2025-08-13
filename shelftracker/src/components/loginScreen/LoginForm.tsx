@@ -1,8 +1,8 @@
 // src/components/LoginForm.tsx
 import React, { useState } from "react";
-import { useAuth } from "../hooks/AuthHook";
+import { useAuth } from "../../hooks/AuthHook.ts";
 import { useNavigate } from "react-router-dom";
-import "../styles/Glass.css";
+import "../../styles/Glass.css";
 
 interface LoginFormProps {
     onSuccess?: () => void;

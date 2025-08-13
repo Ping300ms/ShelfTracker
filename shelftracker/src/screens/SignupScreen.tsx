@@ -1,4 +1,4 @@
-import { SignupForm } from "../components/SignupForm";
+import { SignupForm } from "../components/signupScreen/SignupForm.tsx";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthHook";
 

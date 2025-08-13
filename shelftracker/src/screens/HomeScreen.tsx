@@ -1,15 +1,22 @@
-import { EquipmentList } from "../components/EquipmentList.tsx";
+import { EquipmentList } from "../components/homeScreen/EquipmentList.tsx";
 import { useAuth } from "../hooks/AuthHook.ts";
 import { useNavigate } from "react-router-dom";
+import {useEffect} from "react";
 
 function HomeScreen() {
-    const { signOut } = useAuth();
+    const { signOut, user } = useAuth();
     const navigate = useNavigate();
 
     const useSignOut = async () => {
         await signOut();
         navigate ("/ShelfTracker/login");
     }
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/ShelfTracker/login");
+        }
+    })
 
     return (
         <div>

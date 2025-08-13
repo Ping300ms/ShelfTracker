@@ -1,4 +1,4 @@
-import { LoginForm } from "../components/LoginForm";
+import { LoginForm } from "../components/loginScreen/LoginForm.tsx";
 import { NavLink } from "react-router-dom";
 import "../styles/Glass.css";
 

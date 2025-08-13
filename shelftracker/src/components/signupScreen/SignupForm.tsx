@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../hooks/AuthHook";
+import { useAuth } from "../../hooks/AuthHook.ts";
 
 interface SignupFormProps {
     onSuccess?: () => void;
