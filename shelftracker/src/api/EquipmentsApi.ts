@@ -1,5 +1,5 @@
 import { supabase } from './SupabaseClient';
-import type {Equipment, NewEquipment} from '../types/Equipment';
+import type {Equipment, NewEquipment} from '../types/Equipment.ts';
 
 const dbName: string = "equipments";
 

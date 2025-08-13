@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getEquipments } from '../../api/EquipmentsApi.ts';
-import type { Equipment } from '../../types/Equipment.tsx';
+import type { Equipment } from '../../types/Equipment.ts';
 
 export const EquipmentList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
