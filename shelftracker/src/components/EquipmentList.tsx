@@ -1,16 +1,18 @@
 import type { Equipment } from "../types/Equipment";
 import "../styles/EquipmentList.css";
 import {EquipmentCard} from "./EquipmentCard.tsx";
+import {SearchBar} from "./homeScreen/SearchBar.tsx";
 
 interface EquipmentListProps {
     equipments: Equipment[];
     loading: boolean;
     error: string | null;
     search: string;
+    setSearch: (search: string) => void;
     addedToCart: boolean;
 }
 
-export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, addedToCart }) => {
+export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch, addedToCart }) => {
 
     const filteredEquipments = equipments.filter(
         (eq) =>
@@ -24,6 +26,7 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
 
     return (
         <div className="equipment-list-container">
+            <SearchBar value={search} onChange={setSearch} />
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => (

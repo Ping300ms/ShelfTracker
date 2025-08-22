@@ -8,7 +8,7 @@ export const CartEquipmentList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [search] = useState("");
+    const [search, setSearch] = useState("");
 
     const { cart } = useCart()
 
@@ -26,6 +26,7 @@ export const CartEquipmentList = () => {
         <EquipmentList equipments={equipments}
                        error={error}
                        search={search}
+                       setSearch={setSearch}
                        loading={loading}
                        addedToCart={true}/>
     );

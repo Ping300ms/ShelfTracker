@@ -8,7 +8,7 @@ export const HomeEquipmentList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [search] = useState("");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,6 +30,7 @@ export const HomeEquipmentList = () => {
                        loading={loading}
                        error={error}
                        search={search}
+                       setSearch={setSearch}
                        addedToCart={false}/>
     );
 };
