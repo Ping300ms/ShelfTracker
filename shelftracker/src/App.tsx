@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/common/ProtectedRoute.tsx";
 
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
@@ -10,6 +10,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import {CartProvider} from "./context/CartContext.tsx";
 import CartScreen from "./screens/CartScreen.tsx";
+import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 
 export default function App() {
     return (
@@ -51,6 +52,13 @@ export default function App() {
                             <ProtectedRoute>
                                 <ProtectedLayout>
                                     <CartScreen/>
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/checkout" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <CheckoutScreen/>
                                 </ProtectedLayout>
                             </ProtectedRoute>
                         } />

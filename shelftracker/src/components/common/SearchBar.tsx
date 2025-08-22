@@ -1,4 +1,4 @@
-// src/components/homeScreen/SearchBar.tsx
+// src/components/common/SearchBar.tsx
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import "../../styles/SearchBar.css";
@@ -16,10 +16,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
-            if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                setVisible(false); // scroll down → cache
+            if (currentScrollY > lastScrollY) {
+                // on descend → cacher
+                setVisible(false);
             } else {
-                setVisible(true); // scroll up → montre
+                // on remonte → montrer
+                setVisible(true);
             }
 
             setLastScrollY(currentScrollY);
@@ -30,9 +32,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     }, [lastScrollY]);
 
     return (
-        <div className={`search-bar ${visible ? "show" : "hide"}`}>
+        <div className={`search-bar-container ${visible ? "visible" : "hidden"}`}>
             <input
                 type="text"
+                className={"search-bar"}
                 placeholder="Rechercher un équipement..."
                 value={value}
                 onChange={(e) => onChange(e.target.value)}

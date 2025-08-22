@@ -1,7 +1,7 @@
 import {IoCube, IoAdd, IoRemove} from "react-icons/io5";
-import type { Equipment } from "../types/Equipment.ts";
-import "../styles/EquipmentCard.css";
-import { useCart } from "../hooks/CartHook.ts";
+import type { Equipment } from "../../types/Equipment.ts";
+import "../../styles/EquipmentCard.css";
+import { useCart } from "../../hooks/CartHook.ts";
 
 interface EquipmentCardProps {
     equipment: Equipment;

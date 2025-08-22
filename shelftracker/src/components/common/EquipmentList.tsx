@@ -1,7 +1,7 @@
-import type { Equipment } from "../types/Equipment";
-import "../styles/EquipmentList.css";
+import type { Equipment } from "../../types/Equipment.ts";
+import "../../styles/EquipmentList.css";
 import {EquipmentCard} from "./EquipmentCard.tsx";
-import {SearchBar} from "./homeScreen/SearchBar.tsx";
+import {SearchBar} from "./SearchBar.tsx";
 
 interface EquipmentListProps {
     equipments: Equipment[];

@@ -1,5 +1,5 @@
 // src/layouts/ProtectedLayout.tsx
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar.tsx";
 
 function ProtectedLayout({ children }: { children: React.ReactNode }) {
     return (

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IoHome, IoQrCode, IoPerson } from "react-icons/io5"; // icons Ionicons
-import "../styles/Navbar.css";
+import "../../styles/Navbar.css";
 
 function Navbar() {
     return (
