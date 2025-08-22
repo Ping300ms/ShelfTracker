@@ -1,6 +1,6 @@
 import { LoginForm } from "../components/loginScreen/LoginForm.tsx";
 import { NavLink } from "react-router-dom";
-import "../styles/Glass.css";
+import "../styles/Main.css";
 
 function LoginScreen() {
     return (

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/AuthHook.ts";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Glass.css";
+import "../../styles/Main.css";
 
 interface LoginFormProps {
     onSuccess?: () => void;
