@@ -9,11 +9,17 @@
     --radius: 8px;
     --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     background: var(--bg-color);
+    --app-font: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--app-font), sans-serif;
 }
 
 /* Container centré */
 .root {
     min-height: 100vh;
+    font-family: var(--app-font), sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
