@@ -1,25 +1,32 @@
-.searchbar {
+.search-bar {
     position: sticky;
     top: 0;
+    display: flex;
+    align-items: center;
     background: white;
     padding: 0.5rem 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     z-index: 10;
 }
 
-.searchbar.hide {
+.search-bar.hide {
     transform: translateY(-100%);
 }
 
-.searchbar.show {
+.search-bar.show {
     transform: translateY(0);
 }
 
-.searchbar input {
-    width: 100%;
+.search-bar input {
+    flex: 1;
     padding: 0.6rem 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
+}
+
+.search-icon {
+    margin-left: -2rem;
+    color: #666;
 }

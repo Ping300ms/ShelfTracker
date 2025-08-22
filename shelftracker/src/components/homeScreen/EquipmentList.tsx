@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getEquipments } from "../../api/EquipmentsApi";
 import type { Equipment } from "../../types/Equipment";
 import { EquipmentCard } from "./EquipmentCard.tsx";
-import { IoSearch } from "react-icons/io5";
+import { SearchBar } from "./SearchBar.tsx"; // 👈 import
 import "../../styles/EquipmentList.css";
 
 export const EquipmentList = () => {
@@ -38,18 +38,7 @@ export const EquipmentList = () => {
 
     return (
         <div className="equipment-list-container">
-            {/* Barre de recherche */}
-            <div className="search-bar">
-                <input
-                    type="text"
-                    placeholder="Rechercher un équipement..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-                <IoSearch size={20} className="search-icon" />
-            </div>
-
-            {/* Liste des équipements */}
+            <SearchBar value={search} onChange={setSearch} /> {/* 👈 nouvelle barre */}
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => (

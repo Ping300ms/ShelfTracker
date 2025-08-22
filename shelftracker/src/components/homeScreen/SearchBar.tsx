@@ -1,11 +1,14 @@
+// src/components/homeScreen/SearchBar.tsx
 import { useEffect, useState } from "react";
+import { IoSearch } from "react-icons/io5";
+import "../../styles/SearchBar.css";
 
 interface SearchBarProps {
-    onSearch: (query: string) => void;
+    value: string;
+    onChange: (value: string) => void;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-    const [query, setQuery] = useState("");
+export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -14,11 +17,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             const currentScrollY = window.scrollY;
 
             if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                // vers le bas → cache
-                setVisible(false);
+                setVisible(false); // scroll down → cache
             } else {
-                // vers le haut → montre
-                setVisible(true);
+                setVisible(true); // scroll up → montre
             }
 
             setLastScrollY(currentScrollY);
@@ -28,20 +29,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setQuery(value);
-        onSearch(value);
-    };
-
     return (
-        <div className={`searchbar ${visible ? "show" : "hide"}`}>
+        <div className={`search-bar ${visible ? "show" : "hide"}`}>
             <input
                 type="text"
                 placeholder="Rechercher un équipement..."
-                value={query}
-                onChange={handleChange}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
             />
+            <IoSearch size={20} className="search-icon" />
         </div>
     );
 };
