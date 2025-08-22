@@ -1,7 +1,7 @@
-/* src/styles/ScanScreen.css */
+/* src/styles/Camera.css */
 
 /* Conteneur principal pour le scan */
-.scan-screen {
+.camera-container {
     width: 100%;
     height: 100%;
     position: relative;
@@ -10,7 +10,7 @@
 }
 
 /* Conteneur du lecteur QR */
-.scan-screen #reader {
+.camera-container #reader {
     width: 100%;
     height: 100%;
 }
