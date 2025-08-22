@@ -1,0 +1,33 @@
+/* src/styles/ScanScreen.css */
+
+/* Conteneur principal pour le scan */
+.scan-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+}
+
+/* Conteneur du lecteur QR */
+.scan-screen #reader {
+    width: 100%;
+    height: 100%;
+}
+
+/* Affichage du QR code scanné */
+
+/*
+.scan-screen .scanned-code {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    text-align: center;
+}
+*/
