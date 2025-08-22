@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import { getEquipments } from "../../api/EquipmentsApi";
 import type { Equipment } from "../../types/Equipment";
-import { EquipmentCard } from "./EquipmentCard.tsx";
 import { IoSearch } from "react-icons/io5";
 import "../../styles/EquipmentList.css";
+import {useCart} from "../../hooks/CartHook.ts";
+import {CartCard} from "./CartCard.tsx";
 
-export const EquipmentList = () => {
+export const CartList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getEquipments();
-                setEquipments(data);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : "Erreur inconnue");
-            } finally {
-                setLoading(false);
-            }
-        };
+    const { cart } = useCart()
 
-        fetchData();
-    }, []);
+    useEffect(() => {
+        try {
+            setEquipments(cart);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Erreur inconnue");
+        } finally {
+            setLoading(false);
+        }
+    }, [cart]);
 
     const filteredEquipments = equipments.filter(
         (eq) =>
@@ -53,7 +50,7 @@ export const EquipmentList = () => {
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => (
-                        <EquipmentCard key={eq.id} equipment={eq} />
+                        <CartCard key={eq.id} equipment={eq} />
                     ))
                 ) : (
                     <p>Aucun équipement trouvé.</p>

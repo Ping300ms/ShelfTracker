@@ -1,4 +1,4 @@
-import {IoCube, IoAdd} from "react-icons/io5";
+import {IoCube, IoRemove} from "react-icons/io5";
 import type { Equipment } from "../../types/Equipment.ts";
 import "../../styles/EquipmentCard.css";
 import { useCart } from "../../hooks/CartHook.ts";
@@ -7,8 +7,8 @@ interface EquipmentCardProps {
     equipment: Equipment;
 }
 
-export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
-    const { addToCart } = useCart();
+export const CartCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
+    const { removeFromCart } = useCart();
 
     return (
         <div className="equipment-card">
@@ -28,9 +28,9 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
             {/* Bouton ajouter au panier */}
             <button
                 className="equipment-add-btn"
-                onClick={() => addToCart(equipment)}
+                onClick={() => removeFromCart(equipment.id)}
             >
-                <IoAdd size={28} color="lightgreen" />
+                <IoRemove size={28} color="red" />
             </button>
         </div>
     );

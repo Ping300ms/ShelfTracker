@@ -1,4 +1,4 @@
-// src/screens/ScanScreen.tsx
+// src/screens/scanScreen.tsx
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import "../../styles/Camera.css";

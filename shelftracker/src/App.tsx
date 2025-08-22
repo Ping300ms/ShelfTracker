@@ -8,44 +8,55 @@ import SignupScreen from "./screens/SignupScreen";
 import ScanScreen from "./screens/ScanScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ProtectedLayout from "./layouts/ProtectedLayout";
+import {CartProvider} from "./context/CartContext.tsx";
+import CartScreen from "./screens/CartScreen.tsx";
 
 export default function App() {
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    {/* Public */}
-                    <Route path="/ShelfTracker/login" element={
+            <CartProvider>
+                <BrowserRouter>
+                    <Routes>
+                        {/* Public */}
+                        <Route path="/ShelfTracker/login" element={
                             <LoginScreen />
-                    } />
-                    <Route path="/ShelfTracker/signup" element={
+                        } />
+                        <Route path="/ShelfTracker/signup" element={
                             <SignupScreen />
-                    } />
+                        } />
 
-                    {/* Privé */}
-                    <Route path="/ShelfTracker" element={
-                        <ProtectedRoute>
-                            <ProtectedLayout>
-                                <HomeScreen />
-                            </ProtectedLayout>
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/ShelfTracker/scan" element={
-                        <ProtectedRoute>
-                            <ProtectedLayout>
-                                <ScanScreen />
-                            </ProtectedLayout>
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/ShelfTracker/profile" element={
-                        <ProtectedRoute>
-                            <ProtectedLayout>
-                                <ProfileScreen />
-                            </ProtectedLayout>
-                        </ProtectedRoute>
-                    } />
-                </Routes>
-            </BrowserRouter>
+                        {/* Privé */}
+                        <Route path="/ShelfTracker" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <HomeScreen />
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/scan" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <ScanScreen />
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/profile" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <ProfileScreen />
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/cart" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <CartScreen/>
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                    </Routes>
+                </BrowserRouter>
+            </CartProvider>
         </AuthProvider>
     );
 }
