@@ -1,11 +1,11 @@
-import {CartList} from "../components/cartScreen/CartList.tsx";
+import {CartEquipmentList} from "../components/cartScreen/CartEquipmentList.tsx";
 import FloatingCheckout from "../components/cartScreen/FloatingCheckout.tsx";
 
 function CartScreen() {
 
     return (
         <div>
-            <CartList/>
+            <CartEquipmentList/>
             <FloatingCheckout/>
         </div>
     );

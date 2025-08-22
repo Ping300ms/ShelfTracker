@@ -15,6 +15,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [cart, setCart] = useState<Equipment[]>([]);
 
     const addToCart = (equipment: Equipment) => {
+        if (cart.some((item) => item.id === equipment.id)) return;
         setCart((prev) => [...prev, equipment]);
     };
 
