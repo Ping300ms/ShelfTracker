@@ -2,6 +2,8 @@ import type { Equipment } from "../../types/Equipment.ts";
 import "../../styles/EquipmentList.css";
 import {EquipmentCard} from "./EquipmentCard.tsx";
 import {SearchBar} from "./SearchBar.tsx";
+import {Loader} from "./Loader.tsx";
+import {EmptyState} from "./EmptyState.tsx";
 
 interface EquipmentListProps {
     equipments: Equipment[];
@@ -20,9 +22,9 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
             (eq.location?.toLowerCase().includes(search.toLowerCase()) ?? false)
     );
 
-    if (loading) return <p>Chargement...</p>;
+    if (loading) return <Loader/>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
-    if (equipments.length === 0) return <p>Aucun équipement trouvé.</p>;
+    if (equipments.length === 0) return <EmptyState message="Aucun équipement trouvé." />;
 
     return (
         <div className="equipment-list-container">
@@ -33,7 +35,7 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
                         <EquipmentCard key={eq.id} equipment={eq} addedToCard={addedToCart} />
                     ))
                 ) : (
-                    <p>Aucun équipement trouvé.</p>
+                    <EmptyState message="Aucun équipement trouvé." />
                 )}
             </div>
         </div>
