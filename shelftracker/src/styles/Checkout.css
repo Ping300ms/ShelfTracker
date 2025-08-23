@@ -1,0 +1,27 @@
+.checkout-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date-selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.error-box, .success-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f8d7da;
+    color: #842029;
+}
+
+.success-box {
+    background: #d1e7dd;
+    color: #0f5132;
+}
