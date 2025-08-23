@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {createBooking, getAllBookings} from "../api/BookingsApi";
+import { createBooking, getAllBookings } from "../api/BookingsApi";
 import type { Equipment } from "../types/Equipment";
 import { IoAlertCircleOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
 import TopBar from "../components/common/TopBar.tsx";
 import "../styles/Checkout.css";
-import {useCart} from "../hooks/CartHook.ts";
+import { useCart } from "../hooks/CartHook.ts";
 //import {useAuth} from "../hooks/AuthHook.ts";
 
 function CheckoutScreen() {
@@ -16,7 +16,7 @@ function CheckoutScreen() {
     const [success, setSuccess] = useState(false);
 
     const navigate = useNavigate();
-    const {cart} = useCart();
+    const { cart } = useCart();
     //const {user} = useAuth();
 
     const handleCheckout = async () => {
@@ -25,27 +25,39 @@ function CheckoutScreen() {
             return;
         }
 
+        const now = new Date();
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
+        if (start < now) {
+            alert("La date de début ne peut pas être dans le passé.");
+            return;
+        }
+        if (end < now) {
+            alert("La date de fin ne peut pas être dans le passé.");
+            return;
+        }
+        if (start >= end) {
+            alert("La date de début doit être avant la date de fin.");
+            return;
+        }
+
         setLoading(true);
         setErrorItems([]);
         setSuccess(false);
-
-
 
         try {
             const conflicts: Equipment[] = [];
 
             const bookings = await getAllBookings();
-            console.log(bookings);
+
             for (const eq of cart) {
-
-                /*
-                const conflictingBookings = bookings.filter((b) => b.equipment_id === eq.id
-                                                                                  && b.start_time <= endDate
-                                                                                  && b.end_time >= startDate);
-
-                 */
-
-                const conflictingBookings = bookings.filter((b) => b.equipment_id === eq.id);
+                const conflictingBookings = bookings.filter(
+                    (b) =>
+                        b.equipment_id === eq.id &&
+                        new Date(b.start_time) <= end &&
+                        new Date(b.end_time) >= start
+                );
 
                 if (conflictingBookings.length > 0) {
                     conflicts.push(eq);
@@ -62,8 +74,8 @@ function CheckoutScreen() {
                     equipment_id: eq.id,
                     booker_id: 1,
                     rent: true,
-                    start_time: startDate,
-                    end_time: endDate,
+                    start_time: start.toISOString(),
+                    end_time: end.toISOString(),
                 });
             }
 
@@ -76,6 +88,9 @@ function CheckoutScreen() {
         }
     };
 
+    // min="..." empêche la sélection de dates passées
+    const minDate = new Date().toISOString().slice(0, 16); // format YYYY-MM-DDTHH:mm
+
     return (
         <div>
             <TopBar title="Réservation" />
@@ -86,6 +101,7 @@ function CheckoutScreen() {
                         <input
                             type="datetime-local"
                             value={startDate}
+                            min={minDate}
                             onChange={(e) => setStartDate(e.target.value)}
                         />
                     </label>
@@ -95,6 +111,7 @@ function CheckoutScreen() {
                         <input
                             type="datetime-local"
                             value={endDate}
+                            min={startDate || minDate} // la fin ne peut pas être avant le début
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </label>
@@ -127,7 +144,6 @@ function CheckoutScreen() {
                 )}
             </div>
         </div>
-
     );
 }
 
