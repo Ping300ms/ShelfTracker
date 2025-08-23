@@ -131,7 +131,7 @@ function CheckoutScreen() {
                 {/* Sélecteur de profil */}
                 <div className="profile-selector">
                     <label>
-                        Profil :
+                        Profil
                         <select value={selectedProfile} onChange={handleProfileChange}>
                             {profiles.map((p) => (
                                 <option key={p.id} value={p.id}>
@@ -145,7 +145,7 @@ function CheckoutScreen() {
 
                 <div className="date-selectors">
                     <label>
-                        Début :
+                        Début
                         <input
                             type="datetime-local"
                             value={startDate}
@@ -155,7 +155,7 @@ function CheckoutScreen() {
                     </label>
 
                     <label>
-                        Fin :
+                        Fin
                         <input
                             type="datetime-local"
                             value={endDate}

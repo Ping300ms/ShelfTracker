@@ -2,21 +2,83 @@
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.date-selectors {
+/* Label + input alignés joliment */
+.checkout-container label {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    gap: 6px;
+    margin-bottom: 25px;
 }
 
+/* Champs de saisie (inputs et select) */
+.checkout-container input[type="datetime-local"],
+.checkout-container select {
+    padding: 15px 12px;
+    border-radius: 8px;
+    border: 0;
+    background-color: #353535;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    color: white;
+}
+
+/* Focus */
+.checkout-container input[type="datetime-local"]:focus,
+.checkout-container select:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 1px #fff;
+}
+
+/* Dropdown spécifique */
+.profile-selector select {
+    appearance: auto; /* enlève le style par défaut */
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+/* Bouton principal */
+.btn {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: lightgreen;
+    color: black;
+    font-weight: 400;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #005fd1;
+}
+
+.btn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+/* Boîtes de retour (erreur/succès) */
 .error-box, .success-box {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 16px;
     border-radius: 12px;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-box {
     background: #f8d7da;
     color: #842029;
 }
@@ -24,4 +86,9 @@
 .success-box {
     background: #d1e7dd;
     color: #0f5132;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
