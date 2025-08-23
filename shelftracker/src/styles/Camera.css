@@ -1,33 +1,36 @@
-/* src/styles/Camera.css */
-
-/* Conteneur principal pour le scan */
+/* Caméra en plein écran */
 .camera-container {
+    position: fixed;      /* occupe tout l'écran */
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    position: relative;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    background-color: black;
 }
 
-/* Conteneur du lecteur QR */
-.camera-container #reader {
+/* Zone du lecteur QR */
+#reader {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;   /* évite de dépasser la largeur écran */
+    max-height: 100vh;  /* évite de dépasser la hauteur écran */
+    object-fit: cover;  /* garde un bon ratio */
+}
+
+#reader video {
+    object-fit: cover;
     width: 100%;
     height: 100%;
 }
 
-/* Affichage du QR code scanné */
-
-/*
-.scan-screen .scanned-code {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 18px;
-    text-align: center;
+#reader__scan_region {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-*/
