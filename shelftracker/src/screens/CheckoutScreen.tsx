@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createBooking, getAllBookings } from "../api/BookingsApi";
+import { getProfiles } from "../api/ProfilesApi";
 import type { Equipment } from "../types/Equipment";
+import type { Profile } from "../types/Profile";
 import { IoAlertCircleOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
 import TopBar from "../components/common/TopBar.tsx";
 import "../styles/Checkout.css";
 import { useCart } from "../hooks/CartHook.ts";
-//import {useAuth} from "../hooks/AuthHook.ts";
 
 function CheckoutScreen() {
     const [startDate, setStartDate] = useState("");
@@ -15,13 +16,36 @@ function CheckoutScreen() {
     const [errorItems, setErrorItems] = useState<Equipment[]>([]);
     const [success, setSuccess] = useState(false);
 
+    const [profiles, setProfiles] = useState<Profile[]>([]);
+    const [selectedProfile, setSelectedProfile] = useState<number | "">("");
+
     const navigate = useNavigate();
     const { cart } = useCart();
-    //const {user} = useAuth();
+
+    // Charger les profils
+    useEffect(() => {
+        const fetchProfiles = async () => {
+            try {
+                const data = await getProfiles();
+                setProfiles(data);
+                if (data.length > 0) {
+                    setSelectedProfile(data[0].id);
+                }
+            } catch (err) {
+                console.error("Erreur chargement profils", err);
+            }
+        };
+        fetchProfiles();
+    }, []);
 
     const handleCheckout = async () => {
+
         if (!startDate || !endDate) {
             alert("Veuillez sélectionner une date de début et de fin.");
+            return;
+        }
+        if (!selectedProfile || selectedProfile.toString() === "") {
+            alert("Veuillez sélectionner un profil.");
             return;
         }
 
@@ -48,7 +72,6 @@ function CheckoutScreen() {
 
         try {
             const conflicts: Equipment[] = [];
-
             const bookings = await getAllBookings();
 
             for (const eq of cart) {
@@ -72,7 +95,7 @@ function CheckoutScreen() {
             for (const eq of cart) {
                 await createBooking({
                     equipment_id: eq.id,
-                    booker_id: 1,
+                    booker_id: profiles[Number(selectedProfile) - 1].id, // <- profil choisi
                     rent: true,
                     start_time: start.toISOString(),
                     end_time: end.toISOString(),
@@ -89,12 +112,37 @@ function CheckoutScreen() {
     };
 
     // min="..." empêche la sélection de dates passées
-    const minDate = new Date().toISOString().slice(0, 16); // format YYYY-MM-DDTHH:mm
+    const minDate = new Date().toISOString().slice(0, 16);
+
+    const handleProfileChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        if (value === "create") {
+            navigate("/create-profile"); // <- route vers création profil
+        } else {
+            setSelectedProfile(Number(value));
+        }
+    };
 
     return (
         <div>
             <TopBar title="Réservation" />
             <div className="checkout-container">
+
+                {/* Sélecteur de profil */}
+                <div className="profile-selector">
+                    <label>
+                        Profil :
+                        <select value={selectedProfile} onChange={handleProfileChange}>
+                            {profiles.map((p) => (
+                                <option key={p.id} value={p.id}>
+                                    {p.name}
+                                </option>
+                            ))}
+                            <option value="create">+ Ajouter un profil</option>
+                        </select>
+                    </label>
+                </div>
+
                 <div className="date-selectors">
                     <label>
                         Début :
@@ -111,7 +159,7 @@ function CheckoutScreen() {
                         <input
                             type="datetime-local"
                             value={endDate}
-                            min={startDate || minDate} // la fin ne peut pas être avant le début
+                            min={startDate || minDate}
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </label>
