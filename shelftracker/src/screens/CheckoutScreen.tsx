@@ -4,7 +4,7 @@ import { createBooking, getAllBookings } from "../api/BookingsApi";
 import { getProfiles } from "../api/ProfilesApi";
 import type { Equipment } from "../types/Equipment";
 import type { Profile } from "../types/Profile";
-import { IoAlertCircleOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
+import {IoAlertCircleOutline, IoCheckmark} from "react-icons/io5";
 import TopBar from "../components/common/TopBar.tsx";
 import "../styles/Checkout.css";
 import { useCart } from "../hooks/CartHook.ts";
@@ -20,7 +20,7 @@ function CheckoutScreen() {
     const [selectedProfile, setSelectedProfile] = useState<number | "">("");
 
     const navigate = useNavigate();
-    const { cart } = useCart();
+    const { cart, clearCart } = useCart();
 
     // Charger les profils
     useEffect(() => {
@@ -101,6 +101,7 @@ function CheckoutScreen() {
                     end_time: end.toISOString(),
                 });
             }
+            clearCart();
 
             setSuccess(true);
         } catch (err) {
@@ -183,11 +184,14 @@ function CheckoutScreen() {
 
                 {success && (
                     <div className="success-box">
-                        <IoCheckmarkCircleOutline size={24} color="green" />
-                        <p>Réservation confirmée 🎉</p>
-                        <button onClick={() => navigate("/ShelfTracker")}>
-                            Retour à l'accueil
-                        </button>
+                        <div className="success-box-text">
+                            <IoCheckmark size={24} color="black" />
+                            <p>Réservation confirmée</p>
+                            <button className="back-home-button" onClick={() => navigate("/ShelfTracker")}>
+                                Retour à l'accueil
+                            </button>
+                        </div>
+
                     </div>
                 )}
             </div>

@@ -14,18 +14,20 @@ export default defineConfig({
         start_url: '/ShelfTracker/',
         scope: '/ShelfTracker/',
         display: 'fullscreen',
-        background_color: '#ffffff',
-        theme_color: '#0a74da',
+        background_color: '#222222',
+        theme_color: '#222222',
         icons: [
           {
             src: 'icons/icon-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-512x512.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'maskable'
           }
         ]
       }
