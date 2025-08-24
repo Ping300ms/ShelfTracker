@@ -4,7 +4,7 @@ import type { Equipment } from "../../types/Equipment";
 import "../../styles/EquipmentList.css";
 import {EquipmentList} from "../common/EquipmentList.tsx";
 
-export const HomeEquipmentList = () => {
+export const ProfileEquipmentList = () => {
     const [equipments, setEquipments] = useState<Equipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
