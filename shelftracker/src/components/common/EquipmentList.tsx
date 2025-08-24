@@ -11,10 +11,9 @@ interface EquipmentListProps {
     error: string | null;
     search: string;
     setSearch: (search: string) => void;
-    addedToCart: boolean;
 }
 
-export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch, addedToCart }) => {
+export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch }) => {
 
     const filteredEquipments = equipments.filter(
         (eq) =>
@@ -32,7 +31,7 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => (
-                        <EquipmentCard key={eq.id} equipment={eq} addedToCard={addedToCart} />
+                        <EquipmentCard key={eq.id} equipment={eq} />
                     ))
                 ) : (
                     <EmptyState message="Aucun équipement trouvé." />

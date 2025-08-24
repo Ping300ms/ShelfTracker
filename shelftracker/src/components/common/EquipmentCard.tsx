@@ -20,9 +20,9 @@ import {
 
 interface EquipmentCardProps {
     equipment: Equipment;
-    addedToCard: boolean;
 }
 import type { IconType } from "react-icons";
+import {useEffect, useState} from "react";
 
 interface TypeConfig {
     icon: IconType;
@@ -46,11 +46,31 @@ const typeConfig: Record<string, TypeConfig> = {
 };
 
 
-export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment, addedToCard }) => {
-    const { addToCart, removeFromCart } = useCart();
+export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
+    const [addedToCard, setAddedToCart] = useState(false);
+
+    const { addToCart, removeFromCart, cart } = useCart();
 
     const type = equipment.type ?? "Autre";
     const { icon: Icon, color } = typeConfig[type] || typeConfig["Autre"];
+
+    useEffect(() => {
+        if (cart.find(eq => eq.id === equipment.id)) {
+            setAddedToCart(true);
+        }
+        else {
+            setAddedToCart(false);
+        }
+    }, [cart, equipment.id])
+
+    const handleClick = () => {
+        if (addedToCard) {
+            removeFromCart(equipment.id);
+            return;
+        }
+        addToCart(equipment);
+        setAddedToCart(!addedToCard);
+    }
 
     return (
         <div className="equipment-card">
@@ -69,7 +89,7 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment, addedTo
 
             <button
                 className="equipment-add-btn"
-                onClick={addedToCard ? () => removeFromCart(equipment.id) : () => addToCart(equipment)}
+                onClick={handleClick}
             >
                 {addedToCard ? <IoRemove size={28} color="red" /> : <IoAdd size={28} color="lightgreen" />}
             </button>

@@ -27,7 +27,6 @@ export const CartEquipmentList = () => {
                        error={error}
                        search={search}
                        setSearch={setSearch}
-                       loading={loading}
-                       addedToCart={true}/>
+                       loading={loading}/>
     );
 };
