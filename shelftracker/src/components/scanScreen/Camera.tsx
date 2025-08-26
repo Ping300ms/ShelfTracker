@@ -1,11 +1,12 @@
-// src/screens/scanScreen.tsx
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import "../../styles/Camera.css";
+import { useCart } from "../../hooks/CartHook";
+import { getEquipmentById } from "../../api/EquipmentsApi"; // à créer si tu n’as pas déjà
 
 function Camera() {
     const scannerRef = useRef<Html5Qrcode | null>(null);
     const [scannedCode, setScannedCode] = useState<string | null>(null);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const scannerId = "reader";
@@ -15,9 +16,27 @@ function Camera() {
         html5QrCode
             .start(
                 { facingMode: "environment" },
-                { fps: 10, qrbox: 250, aspectRatio: window.innerWidth / window.innerHeight },
-                (decodedText) => {
-                    setScannedCode(decodedText);
+                {
+                    fps: 10,
+                    qrbox: 250,
+                },
+                async (decodedText) => {
+                    try {
+                        setScannedCode(decodedText);
+
+                        // On suppose que ton QR contient un JSON {id: number}
+                        const parsed = JSON.parse(decodedText);
+
+                        if (parsed.id) {
+                            const equipment = await getEquipmentById(parsed.id);
+                            if (equipment) {
+                                addToCart(equipment);
+                                alert(`${equipment.name} ajouté au panier !`);
+                            }
+                        }
+                    } catch (err) {
+                        console.error("QR non valide", err);
+                    }
                 },
                 () => {}
             )

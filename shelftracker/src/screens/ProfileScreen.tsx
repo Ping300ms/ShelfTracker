@@ -1,9 +1,12 @@
 import { useAuth } from "../hooks/AuthHook.ts";
 import TopBar from "../components/common/TopBar.tsx";
 import "../styles/Profile.css";
+import {useCart} from "../hooks/CartHook.ts";
+import EquipmentQR from "../components/common/EquipmentQR.tsx";
 
 function ProfileScreen() {
     const { user, signOut } = useAuth();
+    const { cart } = useCart();
 
     return (
         <div className="profile-container">
@@ -19,6 +22,7 @@ function ProfileScreen() {
                     </>
                 )}
             </div>
+            {cart.length > 0 && <EquipmentQR equipment={cart[0]} />}
         </div>
     );
 }
