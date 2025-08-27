@@ -5,10 +5,10 @@
     justify-content: center;
     height: 70vh; /* centré verticalement */
     gap: 12px;
-    color: #ffffff;
+    color: var(--tertiary-text-color);
     text-align: center;
 }
 
 .empty-icon {
-    color: #ffffff;
+    color: var(--tertiary-text-color);
 }

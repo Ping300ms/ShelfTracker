@@ -22,12 +22,12 @@
 .qr-shaded-region {
     border: 2px solid rgba(0, 255, 0, 0.7);
     box-sizing: border-box;
-    border-radius: 8px;
+    border-radius: var(--radius);
 }
 
 .equipment-card-container {
     width: calc(100% - 24px); /* 12px de chaque côté */
-    margin: 12px;
+    margin: var(--margin);
     bottom: 50px;
     z-index: 100;
     position: absolute;

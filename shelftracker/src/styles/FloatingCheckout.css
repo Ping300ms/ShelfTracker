@@ -5,7 +5,7 @@
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: lightgreen; /* Couleur du bouton */
+    background-color: var(--success-color); /* Couleur du bouton */
     border-radius: 10%;
     display: flex;
     justify-content: center;
@@ -22,6 +22,6 @@
 
 .fab-checkout ion-icon,
 .fab-checkout svg {
-    color: black;
+    color: var(--secondary-text-color);
     font-size: 28px;
 }

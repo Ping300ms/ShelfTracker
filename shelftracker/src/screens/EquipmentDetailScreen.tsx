@@ -6,10 +6,10 @@ import type {Equipment} from "../types/Equipment.ts";
 import "../styles/EquipmentDetail.css";
 import {Loader} from "../components/common/Loader.tsx";
 
+
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
     const [loading, setLoading] = useState(true);
-
     const { id } = useParams(); // récupère l'id depuis l'URL
 
     useEffect(() => {

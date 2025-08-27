@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #353535;
+    background: var(--tertiary-color);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     padding: 0.6rem 0 20px;
 }
@@ -22,6 +22,6 @@
 }
 
 .nav-item.active {
-    color: #ffffff;
+    color: var(--primary-text-color);
     transform: scale(1.2);
 }

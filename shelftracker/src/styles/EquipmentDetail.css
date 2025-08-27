@@ -1,6 +1,6 @@
 .equipment-detail-container {
-    background-color: #2d2d2d;
-    margin: 12px;
+    background-color: var(--secondary-color);
+    margin: var(--margin);
     padding: 12px;
-    border-radius: 12px;
+    border-radius: var(--radius);
 }
