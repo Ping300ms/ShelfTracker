@@ -23,6 +23,7 @@ interface EquipmentCardProps {
 }
 import type { IconType } from "react-icons";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 interface TypeConfig {
     icon: IconType;
@@ -50,6 +51,7 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
     const [addedToCard, setAddedToCart] = useState(false);
 
     const { addToCart, removeFromCart, cart } = useCart();
+    const navigate = useNavigate();
 
     const type = equipment.type ?? "Autre";
     const { icon: Icon, color } = typeConfig[type] || typeConfig["Autre"];
@@ -72,18 +74,24 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
         setAddedToCart(!addedToCard);
     }
 
+    const handleCardClick = () => {
+        navigate(`/ShelfTracker/equipment/${equipment.id}`)
+    }
+
     return (
         <div className="equipment-card">
             {/* Icône / logo dynamique */}
-            <div className="equipment-icon" style={{ background: color }}>
+            <div className="equipment-icon" style={{ background: color }} onClick={handleCardClick}>
                 <Icon size={28} />
             </div>
 
             {/* Infos principales */}
-            <div className="equipment-info">
-                <p className="equipment-name">{equipment.name}</p>
+            <div className="equipment-info" onClick={handleCardClick}>
+                <p className="equipment-name">
+                    <span>{equipment.name}</span>
+                </p>
                 <p className="equipment-location">
-                    {equipment.location ?? "Emplacement inconnu"}
+                    <span>{equipment.location ?? "Emplacement inconnu"}</span>
                 </p>
             </div>
 

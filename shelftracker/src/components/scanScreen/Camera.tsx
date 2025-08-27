@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import { useCart } from "../../hooks/CartHook";
-import { getEquipmentById } from "../../api/EquipmentsApi"; // à créer si tu n’as pas déjà
+//import { useCart } from "../../hooks/CartHook";
+import { getEquipmentById } from "../../api/EquipmentsApi";
+import type {Equipment} from "../../types/Equipment.ts";
+import {EquipmentCard} from "../common/EquipmentCard.tsx"; // à créer si tu n’as pas déjà
 
 function Camera() {
     const scannerRef = useRef<Html5Qrcode | null>(null);
-    const [scannedCode, setScannedCode] = useState<string | null>(null);
-    const { addToCart } = useCart();
+    const [scannedEquipment, setScannedEquipment] = useState<Equipment | null>(null);
+    //const { addToCart } = useCart();
 
     useEffect(() => {
         const scannerId = "reader";
@@ -22,16 +24,13 @@ function Camera() {
                 },
                 async (decodedText) => {
                     try {
-                        setScannedCode(decodedText);
-
-                        // On suppose que ton QR contient un JSON {id: number}
                         const parsed = JSON.parse(decodedText);
-
                         if (parsed.id) {
                             const equipment = await getEquipmentById(parsed.id);
                             if (equipment) {
-                                addToCart(equipment);
-                                alert(`${equipment.name} ajouté au panier !`);
+                                //addToCart(equipment);
+                                setScannedEquipment(equipment);
+                                //alert(`${equipment.name} ajouté au panier !`);
                             }
                         }
                     } catch (err) {
@@ -55,7 +54,10 @@ function Camera() {
     return (
         <div className="camera-container">
             <div id="reader"></div>
-            {scannedCode && <div className="scanned-code">QR Code : {scannedCode}</div>}
+            {scannedEquipment &&
+                <div className="equipment-card-container">
+                    <EquipmentCard equipment={scannedEquipment}/>
+                </div>}
         </div>
     );
 }

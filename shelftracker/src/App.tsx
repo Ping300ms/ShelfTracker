@@ -11,6 +11,7 @@ import ProtectedLayout from "./layouts/ProtectedLayout";
 import {CartProvider} from "./context/CartContext.tsx";
 import CartScreen from "./screens/CartScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
+import EquipmentDetailScreen from "./screens/EquipmentDetailScreen.tsx";
 
 export default function App() {
     return (
@@ -59,6 +60,13 @@ export default function App() {
                             <ProtectedRoute>
                                 <ProtectedLayout>
                                     <CheckoutScreen/>
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/equipment/:id" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <EquipmentDetailScreen />
                                 </ProtectedLayout>
                             </ProtectedRoute>
                         } />
