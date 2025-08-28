@@ -6,7 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SignupScreen from "./screens/SignupScreen";
 import ScanScreen from "./screens/ScanScreen";
-import ProfileScreen from "./screens/ProfileScreen";
+import SettingsScreen from "./screens/SettingsScreen.tsx";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import {CartProvider} from "./context/CartContext.tsx";
 import CartScreen from "./screens/CartScreen.tsx";
@@ -45,7 +45,7 @@ export default function App() {
                         <Route path="/ShelfTracker/profile" element={
                             <ProtectedRoute>
                                 <ProtectedLayout>
-                                    <ProfileScreen />
+                                    <SettingsScreen />
                                 </ProtectedLayout>
                             </ProtectedRoute>
                         } />

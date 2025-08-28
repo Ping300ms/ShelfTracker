@@ -32,7 +32,12 @@
     outline: none;
 }
 
-.search-icon {
-    margin-left: -28px;
+.search-filter {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary-color);
+    font-size: 14px;
+    cursor: pointer;
     color: var(--tertiary-text-color);
 }

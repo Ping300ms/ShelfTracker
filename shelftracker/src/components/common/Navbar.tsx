@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { IoHome, IoQrCode, IoPerson } from "react-icons/io5"; // icons Ionicons
+import {IoHome, IoQrCode, IoSettings} from "react-icons/io5"; // icons Ionicons
 import "../../styles/Navbar.css";
 
 function Navbar() {
@@ -30,7 +30,7 @@ function Navbar() {
                     isActive ? "nav-item active" : "nav-item"
                 }
             >
-                <IoPerson size={24} />
+                <IoSettings size={24} />
             </NavLink>
         </nav>
     );
