@@ -40,4 +40,5 @@
     font-size: 14px;
     cursor: pointer;
     color: var(--tertiary-text-color);
+    width: 100%;
 }

@@ -33,7 +33,10 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
 
     return (
         <div className="equipment-list-container">
-            <SearchBar value={search} onChange={setSearch} typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
+            <SearchBar value={search}
+                       onChange={setSearch}
+                       typeFilter={typeFilter}
+                       setTypeFilter={setTypeFilter} />
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => <EquipmentCard key={eq.id} equipment={eq} />)
