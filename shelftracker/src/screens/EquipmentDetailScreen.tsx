@@ -6,25 +6,46 @@ import type {Equipment} from "../types/Equipment.ts";
 import "../styles/EquipmentDetail.css";
 import {Loader} from "../components/common/Loader.tsx";
 import {typeConfig} from "../utils/equipmentTypeConfig.ts";
+import {IoAdd, IoRemove} from "react-icons/io5";
+import {useCart} from "../hooks/CartHook.ts";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
     const [loading, setLoading] = useState(true);
+    const [addedToCard, setAddedToCart] = useState(false);
     const { id } = useParams();
+    const { addToCart, removeFromCart, cart } = useCart();
+
+    const handleClick = () => {
+        if (!equipment)
+            return;
+
+        if (addedToCard) {
+            removeFromCart(equipment?.id);
+            return;
+        }
+        addToCart(equipment);
+        setAddedToCart(!addedToCard);
+    }
 
     useEffect(() => {
         const getEquipment = async () => {
             const equipment = await getEquipmentById(Number(id));
             setEquipment(equipment);
-            console.log(equipment);
-
+            if (cart.find(eq => eq.id === equipment?.id)) {
+                setAddedToCart(true);
+            }
+            else {
+                setAddedToCart(false);
+            }
             setLoading(false);
 
         }
 
         getEquipment();
 
-    }, [id]);
+    }, [id, cart]);
+
 
     if (loading) return (
         <div>
@@ -45,6 +66,12 @@ function EquipmentDetailScreen() {
                         <Icon size={28} color="white" />
                     </div>
                     <h2 className="equipment-detail-name">{equipment?.name}</h2>
+                    <button
+                        className="equipment-detail-add-btn"
+                        onClick={handleClick}
+                    >
+                        {addedToCard ? <IoRemove size={28} color="lightcoral" /> : <IoAdd size={28} color="lightgreen" />}
+                    </button>
                 </div>
                 <p className="equipment-detail-type">{equipment?.type}</p>
                 <p className="equipment-detail-location">

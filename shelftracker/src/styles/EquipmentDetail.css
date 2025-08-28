@@ -28,3 +28,9 @@
     flex-direction: row;
     align-items: center;
 }
+
+.equipment-detail-add-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+}
