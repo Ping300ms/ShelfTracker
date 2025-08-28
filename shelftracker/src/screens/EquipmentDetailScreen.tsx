@@ -5,18 +5,21 @@ import {useEffect, useState} from "react";
 import type {Equipment} from "../types/Equipment.ts";
 import "../styles/EquipmentDetail.css";
 import {Loader} from "../components/common/Loader.tsx";
-
+import {typeConfig} from "../utils/equipmentTypeConfig.ts";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
     const [loading, setLoading] = useState(true);
-    const { id } = useParams(); // récupère l'id depuis l'URL
+    const { id } = useParams();
 
     useEffect(() => {
         const getEquipment = async () => {
             const equipment = await getEquipmentById(Number(id));
-            setEquipment(equipment)
-            setLoading(false)
+            setEquipment(equipment);
+            console.log(equipment);
+
+            setLoading(false);
+
         }
 
         getEquipment();
@@ -30,18 +33,33 @@ function EquipmentDetailScreen() {
         </div>
     );
 
+    const type = equipment?.type ?? "Autre";
+    const { icon: Icon, color } = typeConfig[type] || typeConfig["Autre"];
+
     return (
         <div>
             <TopBar title="Détails"/>
             <div className="equipment-detail-container">
-                <h2>{equipment?.name}</h2>
-                <h2>{equipment?.type}</h2>
-                <h2>{equipment?.note}</h2>
-                <h2>{equipment?.location}</h2>
-                <h2>{equipment?.rent_price}</h2>
+                <div className="equipment-card-header">
+                    <div className="equipment-detail-icon" style={{ background: color }}>
+                        <Icon size={28} color="white" />
+                    </div>
+                    <h2 className="equipment-detail-name">{equipment?.name}</h2>
+                </div>
+                <p className="equipment-detail-type">{equipment?.type}</p>
+                <p className="equipment-detail-location">
+                    {equipment?.location == null
+                    ? "Emplacement inconnu"
+                    : equipment?.location}</p>
+            </div>
+            <div className="equipment-detail-note-container">
+                <p className="equipment-detail-note">
+                    {equipment?.note == null
+                        ? "Cet equipement n'a pas de description."
+                        : equipment?.note}
+                </p>
             </div>
         </div>
-
     );
 }
 

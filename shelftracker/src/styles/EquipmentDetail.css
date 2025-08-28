@@ -4,3 +4,27 @@
     padding: 12px;
     border-radius: var(--radius);
 }
+
+.equipment-detail-note-container {
+    background-color: var(--secondary-color);
+    margin: var(--margin);
+    padding: 12px;
+    border-radius: var(--radius);
+    height: 100%;
+}
+
+.equipment-detail-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--margin);
+}
+
+.equipment-card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
