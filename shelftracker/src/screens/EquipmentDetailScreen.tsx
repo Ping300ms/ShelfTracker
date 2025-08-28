@@ -8,6 +8,7 @@ import {Loader} from "../components/common/Loader.tsx";
 import {typeConfig} from "../utils/equipmentTypeConfig.ts";
 import {IoAdd, IoRemove} from "react-icons/io5";
 import {useCart} from "../hooks/CartHook.ts";
+import EquipmentQR from "../components/common/EquipmentQR.tsx";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
@@ -86,6 +87,9 @@ function EquipmentDetailScreen() {
                         : equipment?.note}
                 </p>
             </div>
+
+            {equipment && <EquipmentQR equipment={equipment} />}
+
         </div>
     );
 }

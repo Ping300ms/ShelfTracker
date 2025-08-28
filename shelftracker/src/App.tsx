@@ -13,6 +13,8 @@ import CartScreen from "./screens/CartScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import EquipmentDetailScreen from "./screens/EquipmentDetailScreen.tsx";
 
+import "./styles/App.css";
+
 export default function App() {
     return (
         <AuthProvider>
