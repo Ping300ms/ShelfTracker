@@ -36,7 +36,7 @@ function EquipmentCreateScreen() {
         setError(null);
         try {
             await createEquipment(form);
-            navigate("/ShelfTracker/equipments");
+            navigate("/ShelfTracker/");
         }
         catch (err) {
             //@ts-expect-error wtf
