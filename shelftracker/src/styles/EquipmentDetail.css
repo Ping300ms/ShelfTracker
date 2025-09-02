@@ -34,3 +34,9 @@
     background: none;
     border: none;
 }
+
+.equipment-detail-delete-btn {
+    background: none;
+    border: none;
+    margin-left: var(--margin);
+}
