@@ -5,6 +5,8 @@ import { EquipmentCard } from "./EquipmentCard.tsx";
 import { SearchBar } from "./SearchBar.tsx";
 import { Loader } from "./Loader.tsx";
 import { EmptyState } from "./EmptyState.tsx";
+import { useNavigate } from "react-router-dom";
+import { IoAdd } from "react-icons/io5";
 
 interface EquipmentListProps {
     equipments: Equipment[];
@@ -16,6 +18,7 @@ interface EquipmentListProps {
 
 export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch }) => {
     const [typeFilter, setTypeFilter] = useState<string>("Tous");
+    const navigate = useNavigate();
 
     const filteredEquipments = equipments.filter((eq) => {
         const matchesSearch =
@@ -33,10 +36,18 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
 
     return (
         <div className="equipment-list-container">
-            <SearchBar value={search}
-                       onChange={setSearch}
-                       typeFilter={typeFilter}
-                       setTypeFilter={setTypeFilter} />
+            {/* Bouton pour créer un nouvel équipement */}
+            <SearchBar
+                value={search}
+                onChange={setSearch}
+                typeFilter={typeFilter}
+                setTypeFilter={setTypeFilter}
+            />
+
+            <div className="equipment-create-btn" onClick={() => navigate("/ShelfTracker/equipment/new")}>
+                <IoAdd className="equipment-create-btn-logo" size={28} />
+            </div>
+
             <div className="equipment-list">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => <EquipmentCard key={eq.id} equipment={eq} />)

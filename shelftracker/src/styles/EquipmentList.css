@@ -75,3 +75,15 @@
     color: #ccc;
     margin: 0;
 }
+
+.equipment-create-btn {
+    display: flex;
+    padding: 10px 16px;
+    color: var(--success-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: var(--success-color) 2px dashed;
+}
