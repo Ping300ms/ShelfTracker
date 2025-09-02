@@ -9,6 +9,7 @@ import {typeConfig} from "../utils/equipmentTypeConfig.ts";
 import {IoAdd, IoRemove, IoTrashOutline} from "react-icons/io5";
 import {useCart} from "../hooks/CartHook.ts";
 import EquipmentQR from "../components/common/EquipmentQR.tsx";
+import FloatingEdit from "../components/equipmentDetailScreen/FloatingEdit.tsx";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
@@ -29,6 +30,12 @@ function EquipmentDetailScreen() {
         }
         addToCart(equipment);
         setAddedToCart(!addedToCard);
+    }
+
+    const handleEdit = async () => {
+        if (!equipment)
+            return;
+        navigate(`/ShelfTracker/equipment/edit/${equipment.id}`)
     }
 
     const handleDelete = async () => {
@@ -110,7 +117,7 @@ function EquipmentDetailScreen() {
             </div>
 
             {equipment && <EquipmentQR equipment={equipment} />}
-
+            <FloatingEdit onClick={handleEdit}/>
         </div>
     );
 }

@@ -15,6 +15,7 @@ import EquipmentDetailScreen from "./screens/EquipmentDetailScreen.tsx";
 
 import "./styles/App.css";
 import EquipmentCreateScreen from "./screens/EquipmentCreateScreen.tsx";
+import EquipmentEditScreen from "./screens/EquipmentEditScreen.tsx";
 
 export default function App() {
     return (
@@ -70,6 +71,13 @@ export default function App() {
                             <ProtectedRoute>
                                 <ProtectedLayout>
                                     <EquipmentDetailScreen />
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/equipment/edit/:id" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <EquipmentEditScreen />
                                 </ProtectedLayout>
                             </ProtectedRoute>
                         } />
