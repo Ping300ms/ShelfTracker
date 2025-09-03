@@ -61,6 +61,20 @@ export const getUpcomingBookings = async (): Promise<Booking[]> => {
 }
 
 /**
+ * Récupère toutes les réservations non terminées
+ */
+export const getActiveBookings = async (): Promise<Booking[]> => {
+    const { data, error } = await supabase
+        .from(dbName)
+        .select("*")
+        .gt("end_time", new Date().toISOString()) // end_time > NOW
+        .order("end_time", { ascending: true });
+
+    if (error) throw error;
+    return data ?? [];
+}
+
+/**
  * Créer une réservation
  */
 export const createBooking = async (booking: NewBooking): Promise<Booking> => {

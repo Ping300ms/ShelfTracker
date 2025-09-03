@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { createBooking, getAllBookings } from "../api/BookingsApi";
+import {
+    createBooking,
+    getActiveBookings,
+} from "../api/BookingsApi";
 import { getProfiles } from "../api/ProfilesApi";
 import type { Equipment } from "../types/Equipment";
 import type { Profile } from "../types/Profile";
@@ -72,7 +75,7 @@ function CheckoutScreen() {
 
         try {
             const conflicts: Equipment[] = [];
-            const bookings = await getAllBookings();
+            const bookings = await getActiveBookings();
 
             for (const eq of cart) {
                 const conflictingBookings = bookings.filter(
