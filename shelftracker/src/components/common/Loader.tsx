@@ -1,10 +1,9 @@
-// src/components/common/Loader.tsx
-import "../../styles/Loader.css";
+import "./Loader.css";
 
 export const Loader = () => {
     return (
-        <div className="loader-container">
-            <div className="loader"></div>
+        <div className="loader__container">
+            <div className="loader__animation"></div>
             <p>Chargement...</p>
         </div>
     );

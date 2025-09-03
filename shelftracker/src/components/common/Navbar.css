@@ -1,5 +1,5 @@
 /* src/styles/Navbar.css */
-.navbar {
+.navbar__container {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -12,7 +12,7 @@
     padding: 0.6rem 0 20px;
 }
 
-.nav-item {
+.navbar__item {
     color: #7d7d7d;
     text-decoration: none;
     display: flex;
@@ -21,7 +21,7 @@
     transition: transform 0.2s, color 0.2s;
 }
 
-.nav-item.active {
+.navbar__item.active {
     color: var(--primary-text-color);
     transform: scale(1.2);
 }

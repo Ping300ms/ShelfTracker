@@ -1,10 +1,11 @@
 import type { Equipment } from "../../types/Equipment";
+import "./EquipmentNotes.css";
 
-export function EquipmentInfo({ equipment }: { equipment: Equipment }) {
+export function EquipmentNotes({ equipment }: { equipment: Equipment }) {
     return (
         <>
-            <div className="equipment-detail-note-container">
-                <p className="equipment-detail-note">
+            <div className="card">
+                <p>
                     {equipment?.note == null ? "Cet équipement n'a pas de description." : equipment?.note}
                 </p>
             </div>

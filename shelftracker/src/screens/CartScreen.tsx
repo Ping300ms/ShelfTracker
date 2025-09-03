@@ -1,8 +1,9 @@
 import {CartEquipmentList} from "../components/cartScreen/CartEquipmentList.tsx";
-import FloatingCheckout from "../components/cartScreen/FloatingCheckout.tsx";
 import {useCart} from "../hooks/CartHook.ts";
 import {useNavigate} from "react-router-dom";
 import TopBar from "../components/common/TopBar.tsx";
+import FloatingButton from "../components/common/FloatingButton.tsx";
+import {IoCheckmark} from "react-icons/io5";
 
 function CartScreen() {
 
@@ -17,7 +18,10 @@ function CartScreen() {
         <div>
             <TopBar title={"Panier"}/>
             <CartEquipmentList/>
-            {cart.length > 0 && <FloatingCheckout onClick={onClick}/>}
+            {cart.length > 0 && <FloatingButton icon={IoCheckmark}
+                                                onClick={onClick}
+                                                color={"var(--tertiary-color)"}/>}
+
         </div>
     );
 }

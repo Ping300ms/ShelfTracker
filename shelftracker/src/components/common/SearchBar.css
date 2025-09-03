@@ -1,4 +1,4 @@
-.search-bar-container {
+.search-bar__container {
     position: sticky;
     top: 56px; /* hauteur de la TopBar */
     display: flex;
@@ -10,21 +10,21 @@
     border-radius: var(--radius);
 }
 
-.search-bar-container.hidden {
+.search-bar__container.hidden {
     transform: translateY(-110%);
 }
 
-.search-bar-container.visible {
+.search-bar__container.visible {
     transform: translateY(0);
 }
 
-.search-bar-container input {
+.search-bar__container input {
     flex: 1;
     padding: 8px 12px;
     border-radius: var(--radius);
 }
 
-.search-bar{
+.search-bar__input {
     background-color: var(--tertiary-color);
     border: none;
     color: var(--primary-text-color);
@@ -32,7 +32,7 @@
     outline: none;
 }
 
-.search-filter {
+.search-bar__filter {
     padding: 6px 10px;
     border-radius: 8px;
     border: none;

@@ -1,6 +1,6 @@
 // src/components/common/SearchBar.tsx
 import { useEffect, useState } from "react";
-import "../../styles/SearchBar.css";
+import "./SearchBar.css";
 
 interface SearchBarProps {
     value: string;
@@ -42,17 +42,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, typeFilte
     }, [lastScrollY]);
 
     return (
-        <div className={`search-bar-container ${visible ? "visible" : "hidden"}`}>
+        <div className={`search-bar__container ${visible ? "visible" : "hidden"}`}>
             <input
                 type="text"
-                className="search-bar"
+                className="search-bar__input"
                 placeholder="Rechercher un équipement..."
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
             />
 
             <select
-                className="search-filter"
+                className="search-bar__filter"
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
             >

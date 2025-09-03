@@ -1,0 +1,18 @@
+.error-box__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--secondary-text-color);
+    gap: 1rem;
+}
+
+.error-box__home-btn {
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+.error-box__list {
+    color: var(--secondary-text-color);
+
+}

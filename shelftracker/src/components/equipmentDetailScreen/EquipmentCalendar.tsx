@@ -3,6 +3,7 @@ import { Calendar, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { localizer } from "../../utils/calendar";
 import type { Booking } from "../../types/Booking";
+import "./EquipmentCalendar.css";
 
 export function EquipmentCalendar({ bookings }: { bookings: Booking[] }) {
     const events = bookings.map((b) => ({
@@ -13,16 +14,18 @@ export function EquipmentCalendar({ bookings }: { bookings: Booking[] }) {
     }));
 
     return (
-        <div className="equipment-calendar-container">
-            <h3>Réservations</h3>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                defaultView={Views.MONTH}
-                style={{ height: 500, margin: "20px" }}
-            />
+        <div className="card">
+            <div className="equipment-calendar__container">
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    defaultView={Views.MONTH}
+                    className="equipment-calendar__calendar"
+                />
+            </div>
         </div>
+
     );
 }

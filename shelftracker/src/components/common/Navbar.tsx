@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
-import {IoHome, IoQrCode, IoSettings} from "react-icons/io5"; // icons Ionicons
-import "../../styles/Navbar.css";
+import {IoHome, IoQrCode, IoSettings} from "react-icons/io5";
+import "./Navbar.css";
 
 function Navbar() {
     return (
-        <nav className="navbar">
+        <nav className="navbar__container">
             <NavLink
                 to="/ShelfTracker"
                 className={({ isActive }) =>
-                    isActive ? "nav-item active" : "nav-item"
+                    isActive ? "navbar__item active" : "navbar__item"
                 }
                 end
             >
@@ -18,7 +18,7 @@ function Navbar() {
             <NavLink
                 to="/ShelfTracker/scan"
                 className={({ isActive }) =>
-                    isActive ? "nav-item active" : "nav-item"
+                    isActive ? "navbar__item active" : "navbar__item"
                 }
             >
                 <IoQrCode size={24} />
@@ -27,7 +27,7 @@ function Navbar() {
             <NavLink
                 to="/ShelfTracker/profile"
                 className={({ isActive }) =>
-                    isActive ? "nav-item active" : "nav-item"
+                    isActive ? "navbar__item active" : "navbar__item"
                 }
             >
                 <IoSettings size={24} />

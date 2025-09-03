@@ -1,0 +1,26 @@
+.equipment-header__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--margin);
+}
+
+.equipment-header__delete-btn,
+.equipment-header__add-btn {
+    background: none;
+    border: none;
+    margin-left: var(--margin);
+}
+.equipment-header__add-btn {
+    margin-left: auto;
+}
+
+
+.equipment-header__top-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

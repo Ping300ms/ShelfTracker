@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Equipment } from "../../types/Equipment.ts";
-import "../../styles/EquipmentList.css";
+import "./EquipmentList.css";
 import { EquipmentCard } from "./EquipmentCard.tsx";
 import { SearchBar } from "./SearchBar.tsx";
 import { Loader } from "./Loader.tsx";
@@ -35,7 +35,7 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
     if (equipments.length === 0) return <EmptyState message="Aucun équipement trouvé." />;
 
     return (
-        <div className="equipment-list-container">
+        <div className="equipment-list__container">
             {/* Bouton pour créer un nouvel équipement */}
             <SearchBar
                 value={search}
@@ -44,11 +44,11 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
                 setTypeFilter={setTypeFilter}
             />
 
-            <div className="equipment-create-btn" onClick={() => navigate("/ShelfTracker/equipment/new")}>
-                <IoAdd className="equipment-create-btn-logo" size={28} />
+            <div className="equipment-list__create-btn" onClick={() => navigate("/ShelfTracker/equipment/new")}>
+                <IoAdd size={28} />
             </div>
 
-            <div className="equipment-list">
+            <div className="equipment-list__card-container">
                 {filteredEquipments.length > 0 ? (
                     filteredEquipments.map((eq) => <EquipmentCard key={eq.id} equipment={eq} />)
                 ) : (

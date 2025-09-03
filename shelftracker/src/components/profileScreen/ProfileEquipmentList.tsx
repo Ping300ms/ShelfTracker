@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEquipments } from "../../api/EquipmentsApi";
 import type { Equipment } from "../../types/Equipment";
-import "../../styles/EquipmentList.css";
 import {EquipmentList} from "../common/EquipmentList.tsx";
 
 export const ProfileEquipmentList = () => {

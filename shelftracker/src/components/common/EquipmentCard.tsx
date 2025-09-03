@@ -1,5 +1,5 @@
 import type { Equipment } from "../../types/Equipment.ts";
-import "../../styles/EquipmentCard.css";
+import "./EquipmentCard.css";
 import { useCart } from "../../hooks/CartHook.ts";
 
 interface EquipmentCardProps {
@@ -42,24 +42,24 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
     }
 
     return (
-        <div className="equipment-card">
+        <div className="equipment-card__container">
             {/* Icône / logo dynamique */}
-            <div className="equipment-icon" style={{ background: color }} onClick={handleCardClick}>
+            <div className="icon" style={{ background: color }} onClick={handleCardClick}>
                 <Icon size={28} />
             </div>
 
             {/* Infos principales */}
-            <div className="equipment-info" onClick={handleCardClick}>
-                <p className="equipment-name">
+            <div className="equipment-card__info-container" onClick={handleCardClick}>
+                <p className="equipment-card__name">
                     <span>{equipment.name}</span>
                 </p>
-                <p className="equipment-location">
+                <p className="equipment-card__location">
                     <span>{equipment.location ?? "Emplacement inconnu"}</span>
                 </p>
             </div>
 
             <button
-                className="equipment-add-btn"
+                className="equipment-card__add-btn"
                 onClick={handleClick}
             >
                 {addedToCard ? <IoRemove size={28} color="lightcoral" /> : <IoAdd size={28} color="lightgreen" />}

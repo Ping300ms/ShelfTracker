@@ -1,4 +1,5 @@
 import type {Profile} from "../../types/Profile";
+import "./ProfileSelector.css";
 
 interface ProfileSelectorProps {
     profiles: Profile[];
@@ -8,11 +9,12 @@ interface ProfileSelectorProps {
 
 export function ProfileSelector({ profiles, selectedProfile, onChange }: ProfileSelectorProps) {
     return (
-        <div className="profile-selector">
+        <div className="profile-selector__container">
             <label>
                 Profil
                 <select
                     value={selectedProfile}
+                    className="profile-selector__select"
                     onChange={(e) => {
                         const value = e.target.value;
                         if (value === "create") onChange("create");

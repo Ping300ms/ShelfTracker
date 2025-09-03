@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-//import { useCart } from "../../hooks/CartHook";
 import { getEquipmentById } from "../../api/EquipmentsApi";
 import type {Equipment} from "../../types/Equipment.ts";
 import {EquipmentCard} from "../common/EquipmentCard.tsx"; // à créer si tu n’as pas déjà
+import "./Camera.css"
 
 function Camera() {
     const scannerRef = useRef<Html5Qrcode | null>(null);
     const [scannedEquipment, setScannedEquipment] = useState<Equipment | null>(null);
-    //const { addToCart } = useCart();
 
     useEffect(() => {
         const scannerId = "reader";
@@ -52,10 +51,10 @@ function Camera() {
     }, []);
 
     return (
-        <div className="camera-container">
+        <div className="camera__container">
             <div id="reader"></div>
             {scannedEquipment &&
-                <div className="equipment-card-container">
+                <div className="camera__equipment">
                     <EquipmentCard equipment={scannedEquipment}/>
                 </div>}
         </div>

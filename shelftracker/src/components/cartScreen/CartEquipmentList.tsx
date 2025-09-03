@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import type { Equipment } from "../../types/Equipment";
-import "../../styles/EquipmentList.css";
 import {useCart} from "../../hooks/CartHook.ts";
 import {EquipmentList} from "../common/EquipmentList.tsx";
 

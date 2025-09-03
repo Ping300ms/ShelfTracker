@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import TopBar from "../components/common/TopBar.tsx";
 import { createEquipment } from "../api/EquipmentsApi.ts";
 import type { NewEquipment } from "../types/Equipment.ts";
-import "../styles/EquipmentCreate.css";
 
-import { EquipmentForm } from "../components/equipmentCreateScreen/EquipmentForm";
+import { EquipmentCreateForm } from "../components/equipmentCreateScreen/EquipmentCreateForm.tsx";
 
 function EquipmentCreateScreen() {
     const navigate = useNavigate();
@@ -49,15 +48,13 @@ function EquipmentCreateScreen() {
     return (
         <div>
             <TopBar title="Création" />
-            <div className="equipment-detail-container">
-                <EquipmentForm
-                    form={form}
-                    loading={loading}
-                    error={error}
-                    onChange={handleChange}
-                    onSubmit={handleSubmit}
-                />
-            </div>
+            <EquipmentCreateForm
+                form={form}
+                loading={loading}
+                error={error}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+            />
         </div>
     );
 }

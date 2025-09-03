@@ -3,7 +3,6 @@ import TopBar from "../components/common/TopBar";
 import { getEquipmentById, updateEquipment } from "../api/EquipmentsApi";
 import { useEffect, useState } from "react";
 import type { Equipment } from "../types/Equipment";
-import "../styles/EquipmentEdit.css";
 import { Loader } from "../components/common/Loader";
 
 import { EquipmentEditHeader } from "../components/equipmentEditScreen/EquipmentEditHeader";

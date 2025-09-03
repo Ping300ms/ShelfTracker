@@ -12,7 +12,7 @@ import CartScreen from "./screens/CartScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import EquipmentDetailScreen from "./screens/EquipmentDetailScreen.tsx";
 
-import "./styles/App.css";
+import "./global.css";
 import EquipmentCreateScreen from "./screens/EquipmentCreateScreen.tsx";
 import EquipmentEditScreen from "./screens/EquipmentEditScreen.tsx";
 

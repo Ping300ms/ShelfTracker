@@ -1,3 +1,5 @@
+import "./DateRangePicker.css"
+
 interface DateRangePickerProps {
     startDate: string;
     endDate: string;
@@ -14,7 +16,7 @@ export function DateRangePicker({
                                     onEndChange,
                                 }: DateRangePickerProps) {
     return (
-        <div className="date-selectors">
+        <div className="date-range-picker__container">
             <label>
                 Début
                 <input
@@ -22,6 +24,7 @@ export function DateRangePicker({
                     value={startDate}
                     min={minDate}
                     onChange={(e) => onStartChange(e.target.value)}
+                    className="date-range-picker__input"
                 />
             </label>
 
@@ -32,6 +35,7 @@ export function DateRangePicker({
                     value={endDate}
                     min={startDate || minDate}
                     onChange={(e) => onEndChange(e.target.value)}
+                    className="date-range-picker__input"
                 />
             </label>
         </div>

@@ -1,7 +1,7 @@
 // src/components/common/TopBar.tsx
 import {IoChevronBack} from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import "../../styles/TopBar.css";
+import "./TopBar.css";
 
 interface TopBarProps {
     title: string;
@@ -21,14 +21,14 @@ const TopBar: React.FC<TopBarProps> = ({ title, backPath, cantGoBack }) => {
     };
 
     return (
-        <header className="topbar">
+        <header className="top-bar__container">
             {!cantGoBack &&
-                <button className="back-button" onClick={handleBack} aria-label="Retour">
+                <button className="top-bar__back-btn" onClick={handleBack} aria-label="Retour">
                     <IoChevronBack size={24} />
                 </button>}
 
-            <h1 className="topbar-title">{title}</h1>
-            <div className="topbar-spacer" /> {/* pour équilibrer le layout */}
+            <h1 className="top-bar__title">{title}</h1>
+            <div className="top-bar__spacer" /> {/* pour équilibrer le layout */}
         </header>
     );
 };

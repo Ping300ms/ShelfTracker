@@ -1,0 +1,15 @@
+.date-range-picker__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-range-picker__input {
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    border-radius: var(--radius);
+    border: none;
+    margin: var(--margin);
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+}

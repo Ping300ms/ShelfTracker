@@ -1,4 +1,4 @@
-.topbar {
+.top-bar__container {
     position: sticky;
     top: 0;
     display: flex;
@@ -12,7 +12,7 @@
 
 }
 
-.back-button {
+.top-bar__back-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -22,11 +22,11 @@
     color: var(--primary-text-color);
 }
 
-.back-button:active {
+.top-bar__back-btn:active {
     transform: scale(0.95);
 }
 
-.topbar-title {
+.top-bar__title {
     flex: 1;
     text-align: center;
     font-size: 1.2rem;
@@ -35,6 +35,6 @@
     color: var(--primary-text-color);
 }
 
-.topbar-spacer {
+.top-bar__spacer {
     width: 24px; /* même largeur que l'icône pour garder le titre centré */
 }

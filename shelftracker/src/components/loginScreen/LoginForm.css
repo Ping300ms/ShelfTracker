@@ -1,0 +1,16 @@
+.login-form__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form__input {
+    background-color: var(--success-color);
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--radius);
+    margin: var(--margin);
+}
+
+.success-box__text {
+    color: var(--secondary-text-color);
+}

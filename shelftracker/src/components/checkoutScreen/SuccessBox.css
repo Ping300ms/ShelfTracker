@@ -1,0 +1,13 @@
+.success-box__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--secondary-text-color);
+    gap: 1rem;
+}
+
+.success-box__home-btn {
+    background: none;
+    border: none;
+    text-decoration: underline;
+}

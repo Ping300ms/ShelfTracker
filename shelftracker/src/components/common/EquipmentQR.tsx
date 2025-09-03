@@ -1,7 +1,7 @@
 import type { Equipment } from "../../types/Equipment";
 import { QRCodeSVG } from "qrcode.react";
 import { useRef } from "react";
-import "../../styles/EquipmentQR.css";
+import "./EquipmentQR.css";
 import {IoDownloadOutline} from "react-icons/io5";
 
 interface EquipmentQRProps {
@@ -60,10 +60,10 @@ const EquipmentQR: React.FC<EquipmentQRProps> = ({ equipment }) => {
     const qrValue = JSON.stringify({ id: equipment.id, name: equipment.name });
 
     return (
-        <div className="equipmentQR-container">
+        <div className="card centered">
             <QRCodeSVG ref={svgRef} value={qrValue} size={200} />
             <div>
-                <button onClick={() => handleDownload("png")} className="download-button">
+                <button onClick={() => handleDownload("png")} className="equipmentQR__download-btn">
                     <IoDownloadOutline size={24} />
                 </button>
             </div>

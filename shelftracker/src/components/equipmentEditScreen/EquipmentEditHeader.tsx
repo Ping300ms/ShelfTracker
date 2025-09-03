@@ -1,5 +1,6 @@
 import { typeConfig } from "../../utils/equipmentTypeConfig";
 import type { Equipment } from "../../types/Equipment";
+import "./EquipmentEditHeader.css";
 
 interface EquipmentEditHeaderProps {
     equipment: Equipment;
@@ -11,16 +12,18 @@ export function EquipmentEditHeader({ equipment, onChange }: EquipmentEditHeader
     const { icon: Icon, color } = typeConfig[type] || typeConfig["Autre"];
 
     return (
-        <div className="equipment-card-header">
-            <div className="equipment-detail-icon" style={{ background: color }}>
-                <Icon size={28} color="white" />
+        <div className="card">
+            <div className="equipment-edit-header__container">
+                <div className="icon" style={{ background: color }}>
+                    <Icon size={28} color="white" />
+                </div>
+                <input
+                    className="input"
+                    type="text"
+                    value={equipment.name}
+                    onChange={(e) => onChange("name", e.target.value)}
+                />
             </div>
-            <input
-                className="equipment-edit-input"
-                type="text"
-                value={equipment.name}
-                onChange={(e) => onChange("name", e.target.value)}
-            />
         </div>
     );
 }

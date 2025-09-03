@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/AuthHook.ts";
 import { useNavigate } from "react-router-dom";
-import "../../styles/LoginForm.css";
+import "./LoginForm.css";
 
 interface LoginFormProps {
     onSuccess?: () => void;
@@ -34,9 +34,9 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 
     return (
         <>
-            <form className="form" onSubmit={handleSubmit} aria-live="polite">
+            <form className="login-form__container" onSubmit={handleSubmit} aria-live="polite">
                 <input
-                    className="input"
+                    className="login-form__input"
                     type="email"
                     placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -44,7 +44,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
                     required
                 />
                 <input
-                    className="input"
+                    className="login-form__input"
                     type="password"
                     placeholder="Mot de passe"
                     onChange={(e) => setPassword(e.target.value)}

@@ -5,15 +5,15 @@ import { getAllBookings } from "../api/BookingsApi";
 import { useEffect, useState } from "react";
 import type { Equipment } from "../types/Equipment";
 import type { Booking } from "../types/Booking";
-import "../styles/EquipmentDetail.css";
 import { Loader } from "../components/common/Loader";
 import { useCart } from "../hooks/CartHook";
 import EquipmentQR from "../components/common/EquipmentQR";
-import FloatingEdit from "../components/equipmentDetailScreen/FloatingEdit";
 
 import { EquipmentHeader } from "../components/equipmentDetailScreen/EquipmentHeader";
-import { EquipmentInfo } from "../components/equipmentDetailScreen/EquipmentInfo";
+import { EquipmentNotes } from "../components/equipmentDetailScreen/EquipmentNotes.tsx";
 import { EquipmentCalendar } from "../components/equipmentDetailScreen/EquipmentCalendar";
+import FloatingButton from "../components/common/FloatingButton.tsx";
+import {IoPencil} from "react-icons/io5";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
@@ -81,18 +81,17 @@ function EquipmentDetailScreen() {
     return (
         <div>
             <TopBar title="Détails" />
-            <div className="equipment-detail-container">
-                <EquipmentHeader
-                    equipment={equipment}
-                    addedToCart={addedToCart}
-                    onDelete={handleDelete}
-                    onToggleCart={handleClick}
-                />
-                <EquipmentInfo equipment={equipment} />
-            </div>
-
+            <EquipmentHeader
+                equipment={equipment}
+                addedToCart={addedToCart}
+                onDelete={handleDelete}
+                onToggleCart={handleClick}
+            />
+            <EquipmentNotes equipment={equipment} />
             <EquipmentQR equipment={equipment} />
-            <FloatingEdit onClick={handleEdit} />
+            <FloatingButton icon={IoPencil}
+                            color={"var(--tertiary-color)"}
+                            onClick={handleEdit} />
             <EquipmentCalendar bookings={bookings} />
         </div>
     );

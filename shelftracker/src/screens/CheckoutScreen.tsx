@@ -5,13 +5,11 @@ import { getProfiles } from "../api/ProfilesApi";
 import type { Equipment } from "../types/Equipment";
 import type { Profile } from "../types/Profile";
 import TopBar from "../components/common/TopBar.tsx";
-import "../styles/Checkout.css";
 import { useCart } from "../hooks/CartHook.ts";
 
-import { ProfileSelector } from "../components/checkoutScreen/ProfileSelector";
-import { DateRangePicker } from "../components/checkoutScreen/DateRangePicker";
 import { ErrorBox } from "../components/checkoutScreen/ErrorBox";
 import { SuccessBox } from "../components/checkoutScreen/SuccessBox";
+import { CheckoutForm } from "../components/checkoutScreen/CheckoutForm";
 
 function CheckoutScreen() {
     const [startDate, setStartDate] = useState("");
@@ -26,7 +24,6 @@ function CheckoutScreen() {
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
 
-    // Charger profils
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
@@ -111,31 +108,26 @@ function CheckoutScreen() {
     return (
         <div>
             <TopBar title="Réservation" />
-            <div className="checkout-container">
-                <ProfileSelector
-                    profiles={profiles}
-                    selectedProfile={selectedProfile}
-                    onChange={(value) => {
-                        if (value === "create") navigate("/create-profile");
-                        else setSelectedProfile(value);
-                    }}
-                />
 
-                <DateRangePicker
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={minDate}
-                    onStartChange={setStartDate}
-                    onEndChange={setEndDate}
-                />
+            <CheckoutForm
+                profiles={profiles}
+                selectedProfile={selectedProfile}
+                onProfileChange={(value) =>
+                    value === "create"
+                        ? navigate("/create-profile")
+                        : setSelectedProfile(value)
+                }
+                startDate={startDate}
+                endDate={endDate}
+                minDate={minDate}
+                onStartChange={setStartDate}
+                onEndChange={setEndDate}
+                loading={loading}
+                onCheckout={handleCheckout}
+            />
 
-                <button className="btn" onClick={handleCheckout} disabled={loading}>
-                    {loading ? "Réservation..." : "Réserver"}
-                </button>
-
-                <ErrorBox errorItems={errorItems} />
-                {success && <SuccessBox />}
-            </div>
+            <ErrorBox errorItems={errorItems} />
+            {success && <SuccessBox />}
         </div>
     );
 }
