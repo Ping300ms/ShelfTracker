@@ -36,7 +36,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
         <>
             <form className="login-form__container" onSubmit={handleSubmit} aria-live="polite">
                 <input
-                    className="login-form__input"
+                    className="input"
                     type="email"
                     placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -44,7 +44,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
                     required
                 />
                 <input
-                    className="login-form__input"
+                    className="input"
                     type="password"
                     placeholder="Mot de passe"
                     onChange={(e) => setPassword(e.target.value)}
