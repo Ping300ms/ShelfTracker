@@ -4,7 +4,6 @@ import { ProtectedRoute } from "./components/common/ProtectedRoute.tsx";
 
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
-import SignupScreen from "./screens/SignupScreen";
 import ScanScreen from "./screens/ScanScreen";
 import SettingsScreen from "./screens/SettingsScreen.tsx";
 import ProtectedLayout from "./layouts/ProtectedLayout";
@@ -26,9 +25,6 @@ export default function App() {
                         {/* Public */}
                         <Route path="/ShelfTracker/login" element={
                             <LoginScreen />
-                        } />
-                        <Route path="/ShelfTracker/signup" element={
-                            <SignupScreen />
                         } />
 
                         {/* Privé */}

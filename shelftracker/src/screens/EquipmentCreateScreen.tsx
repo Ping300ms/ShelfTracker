@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import TopBar from "../components/common/TopBar.tsx";
 import { createEquipment } from "../api/EquipmentsApi.ts";
 import type { NewEquipment } from "../types/Equipment.ts";
-import { typeConfig } from "../utils/equipmentTypeConfig.ts";
 import "../styles/EquipmentCreate.css";
+
+import { EquipmentForm } from "../components/equipmentCreateScreen/EquipmentForm";
 
 function EquipmentCreateScreen() {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function EquipmentCreateScreen() {
         note: "",
         rent_price: 0,
         location: "",
-        type: "Autre", // valeur par défaut
+        type: "Autre",
     });
 
     const [loading, setLoading] = useState(false);
@@ -37,8 +38,7 @@ function EquipmentCreateScreen() {
         try {
             await createEquipment(form);
             navigate("/ShelfTracker/");
-        }
-        catch (err) {
+        } catch (err) {
             //@ts-expect-error wtf
             setError(err.message);
         } finally {
@@ -50,69 +50,13 @@ function EquipmentCreateScreen() {
         <div>
             <TopBar title="Création" />
             <div className="equipment-detail-container">
-                <form className="equipment-form" onSubmit={handleSubmit}>
-                    {error && <p style={{ color: "red" }}>{error}</p>}
-
-                    <label>
-                        Nom
-                        <input
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-
-                    <label>
-                        Type
-                        <select
-                            name="type"
-                            value={form.type ?? "Autre"}
-                            onChange={handleChange}
-                        >
-                            {Object.keys(typeConfig).map((typeKey) => (
-                                <option key={typeKey} value={typeKey}>
-                                    {typeKey}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-
-                    <label>
-                        Emplacement
-                        <input
-                            type="text"
-                            name="location"
-                            value={form.location ?? ""}
-                            onChange={handleChange}
-                        />
-                    </label>
-
-                    <label>
-                        Prix de location (€)
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="rent_price"
-                            value={form.rent_price}
-                            onChange={handleChange}
-                        />
-                    </label>
-
-                    <label>
-                        Note
-                        <textarea
-                            name="note"
-                            value={form.note ?? ""}
-                            onChange={handleChange}
-                        />
-                    </label>
-
-                    <button type="submit" disabled={loading}>
-                        {loading ? "Création..." : "Créer"}
-                    </button>
-                </form>
+                <EquipmentForm
+                    form={form}
+                    loading={loading}
+                    error={error}
+                    onChange={handleChange}
+                    onSubmit={handleSubmit}
+                />
             </div>
         </div>
     );

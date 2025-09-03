@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-    createBooking,
-    getActiveBookings,
-} from "../api/BookingsApi";
+import { createBooking, getActiveBookings } from "../api/BookingsApi";
 import { getProfiles } from "../api/ProfilesApi";
 import type { Equipment } from "../types/Equipment";
 import type { Profile } from "../types/Profile";
-import {IoAlertCircleOutline, IoCheckmark} from "react-icons/io5";
 import TopBar from "../components/common/TopBar.tsx";
 import "../styles/Checkout.css";
 import { useCart } from "../hooks/CartHook.ts";
+
+import { ProfileSelector } from "../components/checkoutScreen/ProfileSelector";
+import { DateRangePicker } from "../components/checkoutScreen/DateRangePicker";
+import { ErrorBox } from "../components/checkoutScreen/ErrorBox";
+import { SuccessBox } from "../components/checkoutScreen/SuccessBox";
 
 function CheckoutScreen() {
     const [startDate, setStartDate] = useState("");
@@ -22,18 +23,16 @@ function CheckoutScreen() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [selectedProfile, setSelectedProfile] = useState<number | "">("");
 
-    const navigate = useNavigate();
     const { cart, clearCart } = useCart();
+    const navigate = useNavigate();
 
-    // Charger les profils
+    // Charger profils
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
                 const data = await getProfiles();
                 setProfiles(data);
-                if (data.length > 0) {
-                    setSelectedProfile(data[0].id);
-                }
+                if (data.length > 0) setSelectedProfile(data[0].id);
             } catch (err) {
                 console.error("Erreur chargement profils", err);
             }
@@ -42,7 +41,6 @@ function CheckoutScreen() {
     }, []);
 
     const handleCheckout = async () => {
-
         if (!startDate || !endDate) {
             alert("Veuillez sélectionner une date de début et de fin.");
             return;
@@ -56,12 +54,8 @@ function CheckoutScreen() {
         const start = new Date(startDate);
         const end = new Date(endDate);
 
-        if (start < now) {
-            alert("La date de début ne peut pas être dans le passé.");
-            return;
-        }
-        if (end < now) {
-            alert("La date de fin ne peut pas être dans le passé.");
+        if (start < now || end < now) {
+            alert("Les dates doivent être dans le futur.");
             return;
         }
         if (start >= end) {
@@ -84,10 +78,7 @@ function CheckoutScreen() {
                         new Date(b.start_time) <= end &&
                         new Date(b.end_time) >= start
                 );
-
-                if (conflictingBookings.length > 0) {
-                    conflicts.push(eq);
-                }
+                if (conflictingBookings.length > 0) conflicts.push(eq);
             }
 
             if (conflicts.length > 0) {
@@ -98,14 +89,14 @@ function CheckoutScreen() {
             for (const eq of cart) {
                 await createBooking({
                     equipment_id: eq.id,
-                    booker_id: profiles[Number(selectedProfile) - 1].id, // <- profil choisi
+                    booker_id: Number(selectedProfile),
                     rent: true,
                     start_time: start.toISOString(),
                     end_time: end.toISOString(),
                 });
             }
-            clearCart();
 
+            clearCart();
             setSuccess(true);
         } catch (err) {
             console.error(err);
@@ -115,88 +106,35 @@ function CheckoutScreen() {
         }
     };
 
-    // min="..." empêche la sélection de dates passées
     const minDate = new Date().toISOString().slice(0, 16);
-
-    const handleProfileChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = e.target.value;
-        if (value === "create") {
-            navigate("/create-profile"); // <- route vers création profil
-        } else {
-            setSelectedProfile(Number(value));
-        }
-    };
 
     return (
         <div>
             <TopBar title="Réservation" />
             <div className="checkout-container">
+                <ProfileSelector
+                    profiles={profiles}
+                    selectedProfile={selectedProfile}
+                    onChange={(value) => {
+                        if (value === "create") navigate("/create-profile");
+                        else setSelectedProfile(value);
+                    }}
+                />
 
-                {/* Sélecteur de profil */}
-                <div className="profile-selector">
-                    <label>
-                        Profil
-                        <select value={selectedProfile} onChange={handleProfileChange}>
-                            {profiles.map((p) => (
-                                <option key={p.id} value={p.id}>
-                                    {p.name}
-                                </option>
-                            ))}
-                            <option value="create">+ Ajouter un profil</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div className="date-selectors">
-                    <label>
-                        Début
-                        <input
-                            type="datetime-local"
-                            value={startDate}
-                            min={minDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Fin
-                        <input
-                            type="datetime-local"
-                            value={endDate}
-                            min={startDate || minDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </label>
-                </div>
+                <DateRangePicker
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={minDate}
+                    onStartChange={setStartDate}
+                    onEndChange={setEndDate}
+                />
 
                 <button className="btn" onClick={handleCheckout} disabled={loading}>
                     {loading ? "Réservation..." : "Réserver"}
                 </button>
 
-                {errorItems.length > 0 && (
-                    <div className="error-box">
-                        <IoAlertCircleOutline size={24} color="red" />
-                        <p>Impossible de réserver les équipements suivants :</p>
-                        <ul>
-                            {errorItems.map((eq) => (
-                                <li key={eq.id}>{eq.name}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
-                {success && (
-                    <div className="success-box">
-                        <div className="success-box-text">
-                            <IoCheckmark size={24} color="black" />
-                            <p>Réservation confirmée</p>
-                            <button className="back-home-button" onClick={() => navigate("/ShelfTracker")}>
-                                Retour à l'accueil
-                            </button>
-                        </div>
-
-                    </div>
-                )}
+                <ErrorBox errorItems={errorItems} />
+                {success && <SuccessBox />}
             </div>
         </div>
     );

@@ -1,123 +1,99 @@
-import {useNavigate, useParams} from "react-router-dom";
-import TopBar from "../components/common/TopBar.tsx";
-import {deleteEquipment, getEquipmentById} from "../api/EquipmentsApi.ts";
-import {useEffect, useState} from "react";
-import type {Equipment} from "../types/Equipment.ts";
+import { useNavigate, useParams } from "react-router-dom";
+import TopBar from "../components/common/TopBar";
+import { deleteEquipment, getEquipmentById } from "../api/EquipmentsApi";
+import { getAllBookings } from "../api/BookingsApi";
+import { useEffect, useState } from "react";
+import type { Equipment } from "../types/Equipment";
+import type { Booking } from "../types/Booking";
 import "../styles/EquipmentDetail.css";
-import {Loader} from "../components/common/Loader.tsx";
-import {typeConfig} from "../utils/equipmentTypeConfig.ts";
-import {IoAdd, IoRemove, IoTrashOutline} from "react-icons/io5";
-import {useCart} from "../hooks/CartHook.ts";
-import EquipmentQR from "../components/common/EquipmentQR.tsx";
-import FloatingEdit from "../components/equipmentDetailScreen/FloatingEdit.tsx";
+import { Loader } from "../components/common/Loader";
+import { useCart } from "../hooks/CartHook";
+import EquipmentQR from "../components/common/EquipmentQR";
+import FloatingEdit from "../components/equipmentDetailScreen/FloatingEdit";
+
+import { EquipmentHeader } from "../components/equipmentDetailScreen/EquipmentHeader";
+import { EquipmentInfo } from "../components/equipmentDetailScreen/EquipmentInfo";
+import { EquipmentCalendar } from "../components/equipmentDetailScreen/EquipmentCalendar";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
     const [loading, setLoading] = useState(true);
-    const [addedToCard, setAddedToCart] = useState(false);
+    const [bookings, setBookings] = useState<Booking[]>([]);
+    const [addedToCart, setAddedToCart] = useState(false);
     const { id } = useParams();
     const { addToCart, removeFromCart, cart } = useCart();
 
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (!equipment)
-            return;
-
-        if (addedToCard) {
-            removeFromCart(equipment?.id);
+        if (!equipment) return;
+        if (addedToCart) {
+            removeFromCart(equipment.id);
             return;
         }
         addToCart(equipment);
-        setAddedToCart(!addedToCard);
-    }
+        setAddedToCart(!addedToCart);
+    };
 
-    const handleEdit = async () => {
-        if (!equipment)
-            return;
-        navigate(`/ShelfTracker/equipment/edit/${equipment.id}`)
-    }
+    const handleEdit = () => {
+        if (!equipment) return;
+        navigate(`/ShelfTracker/equipment/edit/${equipment.id}`);
+    };
 
     const handleDelete = async () => {
-        if (!equipment)
-            return;
-
-        if (addedToCard) {
-            removeFromCart(equipment?.id);
+        if (!equipment) return;
+        if (addedToCart) {
+            removeFromCart(equipment.id);
             return;
         }
-
         await deleteEquipment(equipment.id);
         navigate("/ShelfTracker/");
-    }
+    };
 
     useEffect(() => {
-        const getEquipment = async () => {
-            const equipment = await getEquipmentById(Number(id));
-            setEquipment(equipment);
-            if (cart.find(eq => eq.id === equipment?.id)) {
-                setAddedToCart(true);
-            }
-            else {
-                setAddedToCart(false);
-            }
+        const fetchEquipment = async () => {
+            const eq = await getEquipmentById(Number(id));
+            setEquipment(eq);
+            setAddedToCart(cart.some((c) => c.id === eq?.id));
             setLoading(false);
+        };
 
-        }
+        const fetchBookings = async () => {
+            const allBookings = await getAllBookings();
+            setBookings(allBookings.filter((b) => b.equipment_id === Number(id)));
+        };
 
-        getEquipment();
-
+        fetchEquipment();
+        fetchBookings();
     }, [id, cart]);
 
+    if (loading) {
+        return (
+            <div>
+                <TopBar title="Détails" />
+                <Loader />
+            </div>
+        );
+    }
 
-    if (loading) return (
-        <div>
-            <TopBar title="Détails"/>
-            <Loader/>
-        </div>
-    );
-
-    const type = equipment?.type ?? "Autre";
-    const { icon: Icon, color } = typeConfig[type] || typeConfig["Autre"];
+    if (!equipment) return null;
 
     return (
         <div>
-            <TopBar title="Détails"/>
+            <TopBar title="Détails" />
             <div className="equipment-detail-container">
-                <div className="equipment-card-header">
-                    <div className="equipment-detail-icon" style={{ background: color }}>
-                        <Icon size={28} color="white" />
-                    </div>
-                    <h2 className="equipment-detail-name">{equipment?.name}</h2>
-                    <button
-                        className="equipment-detail-delete-btn"
-                        onClick={handleDelete}
-                    >
-                        <IoTrashOutline className="equipment-detail-delete-icon" size={24} color="lightcoral" />
-                    </button>
-                    <button
-                        className="equipment-detail-add-btn"
-                        onClick={handleClick}
-                    >
-                        {addedToCard ? <IoRemove size={28} color="lightcoral" /> : <IoAdd size={28} color="lightgreen" />}
-                    </button>
-                </div>
-                <p className="equipment-detail-type">{equipment?.type}</p>
-                <p className="equipment-detail-location">
-                    {equipment?.location == null
-                    ? "Emplacement inconnu"
-                    : equipment?.location}</p>
-            </div>
-            <div className="equipment-detail-note-container">
-                <p className="equipment-detail-note">
-                    {equipment?.note == null
-                        ? "Cet equipement n'a pas de description."
-                        : equipment?.note}
-                </p>
+                <EquipmentHeader
+                    equipment={equipment}
+                    addedToCart={addedToCart}
+                    onDelete={handleDelete}
+                    onToggleCart={handleClick}
+                />
+                <EquipmentInfo equipment={equipment} />
             </div>
 
-            {equipment && <EquipmentQR equipment={equipment} />}
-            <FloatingEdit onClick={handleEdit}/>
+            <EquipmentQR equipment={equipment} />
+            <FloatingEdit onClick={handleEdit} />
+            <EquipmentCalendar bookings={bookings} />
         </div>
     );
 }

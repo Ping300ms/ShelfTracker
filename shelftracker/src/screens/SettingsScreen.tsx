@@ -12,7 +12,7 @@ function SettingsScreen() {
         <div className="profile-container">
             <TopBar title="Paramètres" />
 
-            <div className="profile-card">
+            <div className="card">
                 {user && (
                     <>
                         <h2 className="profile-title">Profil</h2>
@@ -24,7 +24,7 @@ function SettingsScreen() {
                 )}
             </div>
 
-            <div className="profile-card">
+            <div className="card">
                 {user && (
                     <>
                         <h2 className="profile-title">QR Codes</h2>
