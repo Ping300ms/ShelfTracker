@@ -23,7 +23,7 @@
 .equipment-info {
     display: flex;
     flex-direction: column;
-    flex: 1; /* prend tout l'espace dispo entre l'icône et le bouton */
+    flex: 1;
 }
 
 .equipment-name {
@@ -38,7 +38,6 @@
     margin: 0;
 }
 
-/* Bouton ajouter (+) à droite */
 .equipment-add-btn {
     background: none;
     border: none;
