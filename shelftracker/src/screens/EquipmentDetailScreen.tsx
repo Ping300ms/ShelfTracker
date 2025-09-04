@@ -11,9 +11,9 @@ import EquipmentQR from "../components/common/EquipmentQR";
 
 import { EquipmentHeader } from "../components/equipmentDetailScreen/EquipmentHeader";
 import { EquipmentNotes } from "../components/equipmentDetailScreen/EquipmentNotes.tsx";
-import { EquipmentCalendar } from "../components/equipmentDetailScreen/EquipmentCalendar";
 import FloatingButton from "../components/common/FloatingButton.tsx";
 import {IoPencil} from "react-icons/io5";
+import {BookingCalendar} from "../components/common/BookingCalendar.tsx";
 
 function EquipmentDetailScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
@@ -90,9 +90,8 @@ function EquipmentDetailScreen() {
             <EquipmentNotes equipment={equipment} />
             <EquipmentQR equipment={equipment} />
             <FloatingButton icon={IoPencil}
-                            color={"var(--tertiary-color)"}
                             onClick={handleEdit} />
-            <EquipmentCalendar bookings={bookings} />
+            <BookingCalendar bookings={bookings} />
         </div>
     );
 }

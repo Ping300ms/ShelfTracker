@@ -1,0 +1,156 @@
+.booking-calendar__calendar {
+    height: 500px;
+    margin-bottom: 40px;
+    /* border-radius: var(--radius); */
+}
+
+/* Container principal */
+.booking-calendar__container {
+    padding: 1rem;
+    background: var(--tertiary-color);
+    border-radius: var(--radius);
+}
+
+/* Personnalisation du calendrier react-big-calendar */
+.booking-calendar__calendar {
+    overflow: hidden;
+}
+
+/* En-tête (jours et navigation) */
+.rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.rbc-toolbar button {
+    background: var(--primary-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--primary-text-color);
+}
+
+.rbc-toolbar button:hover {
+    background: #eaeaea;
+}
+
+.rbc-toolbar button.rbc-active {
+    background: var(--success-color);
+    color: var(--secondary-text-color);
+}
+
+/* En-tête des jours */
+.rbc-header {
+    background: var(--primary-color);
+    padding: 0.6rem 0;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+/* Cases du calendrier */
+.rbc-date-cell {
+    padding: 4px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Aujourd'hui */
+.rbc-today {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+/* Événements */
+.rbc-event {
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+}
+
+/* Différencier les statuts */
+.rbc-event:has(span:contains("Loué")) {
+    background-color: #e74c3c; /* rouge */
+}
+
+.rbc-event:has(span:contains("Réservé")) {
+    background-color: #2ecc71; /* vert */
+}
+
+/* Vue mois : espacement des cases */
+.rbc-month-view {
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.rbc-day-bg {
+    background: var(--primary-color);
+}
+
+.rbc-month-view {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+.rbc-month-view .rbc-day-bg + .rbc-day-bg {
+    border-color: var(--tertiary-color);
+
+}
+
+.rbc-month-row + .rbc-month-row {
+    border-color: var(--tertiary-color);
+
+}
+
+.rbc-header + .rbc-header {
+    border-left: 1px solid var(--tertiary-color);
+}
+
+.rbc-off-range-bg {
+    background: repeating-linear-gradient(
+            45deg,
+            var(--tertiary-color),
+            var(--tertiary-color) 8px,
+            var(--secondary-color) 8px,
+            var(--secondary-color) 16px
+    ) !important;
+    opacity: 0.6; /* pour atténuer un peu */
+}
+
+/* Texte plus clair */
+.rbc-off-range {
+    color: #666 !important;
+}
+
+
+.rbc-time-view {
+    background: var(--primary-color);
+    border: none;
+    border-radius: var(--radius);
+}
+
+.rbc-day-bg + .rbc-day-bg,
+.rbc-time-header-content,
+.rbc-time-content > * + * > * {
+    border-left: 1px solid var(--tertiary-color);
+}
+
+.rbc-timeslot-group {
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.rbc-time-header.rbc-overflowing {
+    border-right: 1px solid var(--tertiary-color);
+}
+
+.rbc-day-slot .rbc-time-slot,
+.rbc-time-content {
+    border-top: 1px solid var(--tertiary-color);
+}

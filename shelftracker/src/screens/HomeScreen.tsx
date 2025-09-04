@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useCart} from "../hooks/CartHook.ts";
 import TopBar from "../components/common/TopBar.tsx";
 import FloatingButton from "../components/common/FloatingButton.tsx";
-import {IoCart} from "react-icons/io5";
+import {IoCartOutline} from "react-icons/io5";
 
 function HomeScreen() {
     const navigate = useNavigate();
@@ -18,9 +18,8 @@ function HomeScreen() {
         <div>
             <TopBar title={"Accueil"} cantGoBack={true}/>
             <HomeEquipmentList />
-            {cart.length > 0 && <FloatingButton icon={IoCart}
-                                                onClick={handleCartClick}
-                                                color={"var(--tertiary-color)"}/>}
+            {cart.length > 0 && <FloatingButton icon={IoCartOutline}
+                                                onClick={handleCartClick}/>}
         </div>
     );
 }

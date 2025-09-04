@@ -19,8 +19,7 @@ function CartScreen() {
             <TopBar title={"Panier"}/>
             <CartEquipmentList/>
             {cart.length > 0 && <FloatingButton icon={IoCheckmark}
-                                                onClick={onClick}
-                                                color={"var(--tertiary-color)"}/>}
+                                                onClick={onClick}/>}
 
         </div>
     );

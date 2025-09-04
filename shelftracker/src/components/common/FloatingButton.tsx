@@ -5,13 +5,14 @@ import "./FloatingButton.css";
 interface FloatingButtonProps {
     icon: IconType;
     color?: string;
+    iconColor?: string;
     onClick?: () => void;
 }
 
-export default function FloatingButton({ icon: Icon, color = "#4A90E2", onClick }: FloatingButtonProps) {
+export default function FloatingButton({ icon: Icon, color = "var(--success-color)", iconColor = "var(--secondary-text-color)", onClick }: FloatingButtonProps) {
     return (
-        <button className="floating-button__container" style={{ backgroundColor: color }} onClick={onClick}>
-            <Icon size={28} color="white" />
+        <button className="floating-button__container" style={{ backgroundColor: color, color: iconColor }} onClick={onClick}>
+            <Icon size={28} />
         </button>
     );
 }
