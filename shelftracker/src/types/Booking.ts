@@ -1,7 +1,10 @@
+import type {Equipment} from "./Equipment.ts";
+import type {Profile} from "./Profile.ts";
+
 export interface Booking {
-    id: number;
-    equipment_id: number;
-    booker_id: number;
+    id: string;
+    equipment: Equipment;
+    booker: Profile;
     rent: boolean;
     start_time: string; // ISO date string (timestamp)
     end_time: string;   // ISO date string (timestamp)

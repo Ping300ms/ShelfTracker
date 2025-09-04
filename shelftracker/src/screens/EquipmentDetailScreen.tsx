@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import TopBar from "../components/common/TopBar";
 import { deleteEquipment, getEquipmentById } from "../api/EquipmentsApi";
-import { getAllBookings } from "../api/BookingsApi";
+import {getActiveBookingsByEquipment} from "../api/BookingsApi";
 import { useEffect, useState } from "react";
 import type { Equipment } from "../types/Equipment";
 import type { Booking } from "../types/Booking";
@@ -52,19 +52,21 @@ function EquipmentDetailScreen() {
 
     useEffect(() => {
         const fetchEquipment = async () => {
-            const eq = await getEquipmentById(Number(id));
+            if (!id) return;
+            const eq = await getEquipmentById(id);
             setEquipment(eq);
             setAddedToCart(cart.some((c) => c.id === eq?.id));
             setLoading(false);
         };
 
         const fetchBookings = async () => {
-            const allBookings = await getAllBookings();
-            setBookings(allBookings.filter((b) => b.equipment_id === Number(id)));
+            if (!id) return;
+            const allBookings = await getActiveBookingsByEquipment(id);
+            setBookings(allBookings.filter((b) => b.equipment.id === id));
         };
 
-        fetchEquipment();
-        fetchBookings();
+        void fetchEquipment();
+        void fetchBookings();
     }, [id, cart]);
 
     if (loading) {

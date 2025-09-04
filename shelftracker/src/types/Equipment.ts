@@ -1,5 +1,5 @@
 export interface Equipment {
-    id: number;
+    id: string;
     name: string;
     note: string | null;
     rent_price: number;

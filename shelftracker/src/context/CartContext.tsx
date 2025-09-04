@@ -5,7 +5,7 @@ import type { Equipment } from "../types/Equipment";
 interface CartContextType {
     cart: Equipment[];
     addToCart: (equipment: Equipment) => void;
-    removeFromCart: (id: number) => void;
+    removeFromCart: (id: string) => void;
     clearCart: () => void;
 }
 
@@ -19,7 +19,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setCart((prev) => [...prev, equipment]);
     };
 
-    const removeFromCart = (id: number) => {
+    const removeFromCart = (id: string) => {
         setCart((prev) => prev.filter((item) => item.id !== id));
     };
 

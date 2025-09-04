@@ -19,7 +19,7 @@ function CheckoutScreen() {
     const [success, setSuccess] = useState(false);
 
     const [profiles, setProfiles] = useState<Profile[]>([]);
-    const [selectedProfile, setSelectedProfile] = useState<number | "">("");
+    const [selectedProfile, setSelectedProfile] = useState<string | "">("");
 
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ function CheckoutScreen() {
                 console.error("Erreur chargement profils", err);
             }
         };
-        fetchProfiles();
+        void fetchProfiles();
     }, []);
 
     const handleCheckout = async () => {
@@ -42,7 +42,7 @@ function CheckoutScreen() {
             alert("Veuillez sélectionner une date de début et de fin.");
             return;
         }
-        if (!selectedProfile || selectedProfile.toString() === "") {
+        if (!selectedProfile) {
             alert("Veuillez sélectionner un profil.");
             return;
         }
@@ -67,11 +67,13 @@ function CheckoutScreen() {
         try {
             const conflicts: Equipment[] = [];
             const bookings = await getActiveBookings();
+            const profile = profiles.find((p) => p.id === selectedProfile);
+            if (!profile) throw new Error("Unexpected profile selected");
 
             for (const eq of cart) {
                 const conflictingBookings = bookings.filter(
                     (b) =>
-                        b.equipment_id === eq.id &&
+                        b.equipment === eq &&
                         new Date(b.start_time) <= end &&
                         new Date(b.end_time) >= start
                 );
@@ -85,8 +87,8 @@ function CheckoutScreen() {
 
             for (const eq of cart) {
                 await createBooking({
-                    equipment_id: eq.id,
-                    booker_id: Number(selectedProfile),
+                    equipment: eq,
+                    booker: profile,
                     rent: true,
                     start_time: start.toISOString(),
                     end_time: end.toISOString(),

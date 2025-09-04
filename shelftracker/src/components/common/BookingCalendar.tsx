@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error false import error
 import { Calendar, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { localizer } from "../../utils/calendar";

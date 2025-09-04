@@ -3,8 +3,8 @@ import "./ProfileSelector.css";
 
 interface ProfileSelectorProps {
     profiles: Profile[];
-    selectedProfile: number | "";
-    onChange: (value: number | "create") => void;
+    selectedProfile: string | "";
+    onChange: (value: string | "create") => void;
 }
 
 export function ProfileSelector({ profiles, selectedProfile, onChange }: ProfileSelectorProps) {
@@ -18,7 +18,7 @@ export function ProfileSelector({ profiles, selectedProfile, onChange }: Profile
                     onChange={(e) => {
                         const value = e.target.value;
                         if (value === "create") onChange("create");
-                        else onChange(Number(value));
+                        else onChange(value);
                     }}
                 >
                     {profiles.map((p) => (

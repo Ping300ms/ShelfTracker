@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { getEquipmentById } from "../../api/EquipmentsApi";
 import type {Equipment} from "../../types/Equipment.ts";
-import {EquipmentCard} from "../common/EquipmentCard.tsx"; // à créer si tu n’as pas déjà
+import {EquipmentCard} from "../common/EquipmentCard.tsx";
 import "./Camera.css"
 
 function Camera() {

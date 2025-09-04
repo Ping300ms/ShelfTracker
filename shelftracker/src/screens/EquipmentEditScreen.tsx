@@ -17,11 +17,12 @@ function EquipmentEditScreen() {
 
     useEffect(() => {
         const fetchEquipment = async () => {
-            const eq = await getEquipmentById(Number(id));
+            if (!id) return;
+            const eq = await getEquipmentById(id);
             setEquipment(eq);
             setLoading(false);
         };
-        fetchEquipment();
+        void fetchEquipment();
     }, [id]);
 
     const handleChange = (field: keyof Equipment, value: string) => {

@@ -4,8 +4,8 @@ import { DateRangePicker } from "./DateRangePicker";
 
 interface CheckoutFormProps {
     profiles: Profile[];
-    selectedProfile: number | "";
-    onProfileChange: (value: number | "create") => void;
+    selectedProfile: string | "";
+    onProfileChange: (value: string | "create") => void;
 
     startDate: string;
     endDate: string;

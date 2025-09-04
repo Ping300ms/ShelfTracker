@@ -1,25 +1,26 @@
 import { supabase } from './SupabaseClient';
 import type {Equipment, NewEquipment} from '../types/Equipment.ts';
 
-const dbName: string = "equipments";
+const dbName = "equipments";
 
 /**
  * Récupère tous les équipements
  */
 export const getEquipments = async (): Promise<Equipment[]> => {
     const { data, error } = await supabase
-        .from(dbName)
+        .from("equipments")
         .select("*")
         .order("name", { ascending: true });
 
     if (error) throw error;
+    console.log(data);
     return data ?? [];
 };
 
 /**
  * Récupère un équipement par id
  */
-export const getEquipmentById = async (id: number): Promise<Equipment | null> => {
+export const getEquipmentById = async (id: string): Promise<Equipment | null> => {
     const { data, error } = await supabase
         .from(dbName)
         .select('*')
@@ -64,7 +65,7 @@ export const updateEquipment = async (
 /**
  * Supprime un équipement
  */
-export const deleteEquipment = async (id: number): Promise<void> => {
+export const deleteEquipment = async (id: string): Promise<void> => {
     const { error } = await supabase
         .from(dbName)
         .delete()

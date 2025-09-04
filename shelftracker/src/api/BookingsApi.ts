@@ -1,7 +1,27 @@
 import { supabase } from './SupabaseClient';
 import type { Booking, NewBooking } from "../types/Booking.ts";
 
-const dbName: string = "bookings";
+const dbName = "bookings";
+const bookingSelect = `
+  id,
+  rent,
+  start_time,
+  end_time,
+  created_at,
+  equipment: equipments (
+    id,
+    name,
+    note,
+    rent_price,
+    location,
+    created_at,
+    type
+  ),
+  booker: profiles (
+    id,
+    name
+  )
+`;
 
 /**
  * Récupère toutes les réservations
@@ -9,7 +29,7 @@ const dbName: string = "bookings";
 export const getAllBookings = async (): Promise<Booking[]> => {
     const { data, error } = await supabase
         .from(dbName)
-        .select("*")
+        .select(bookingSelect)
         .order("start_time", { ascending: true });
 
     if (error) throw error;
@@ -22,7 +42,7 @@ export const getAllBookings = async (): Promise<Booking[]> => {
 export const getPastBookings = async (): Promise<Booking[]> => {
     const { data, error } = await supabase
         .from(dbName)
-        .select("*")
+        .select(bookingSelect)
         .lt("end_time", new Date().toISOString()) // end_time < NOW
         .order("start_time", { ascending: false });
 
@@ -37,7 +57,7 @@ export const getCurrentBookings = async (): Promise<Booking[]> => {
     const now = new Date().toISOString();
     const { data, error } = await supabase
         .from(dbName)
-        .select("*")
+        .select(bookingSelect)
         .lte("start_time", now) // start_time <= NOW
         .gte("end_time", now)   // end_time >= NOW
         .order("start_time", { ascending: true });
@@ -52,7 +72,7 @@ export const getCurrentBookings = async (): Promise<Booking[]> => {
 export const getUpcomingBookings = async (): Promise<Booking[]> => {
     const { data, error } = await supabase
         .from(dbName)
-        .select("*")
+        .select(bookingSelect)
         .gt("start_time", new Date().toISOString()) // start_time > NOW
         .order("start_time", { ascending: true });
 
@@ -66,8 +86,23 @@ export const getUpcomingBookings = async (): Promise<Booking[]> => {
 export const getActiveBookings = async (): Promise<Booking[]> => {
     const { data, error } = await supabase
         .from(dbName)
-        .select("*")
+        .select(bookingSelect)
         .gt("end_time", new Date().toISOString()) // end_time > NOW
+        .order("end_time", { ascending: true });
+
+    if (error) throw error;
+    return data ?? [];
+}
+
+/**
+ * Récupère toutes les réservations non terminées d'un équipement
+ */
+export const getActiveBookingsByEquipment = async (equipment_id: string): Promise<Booking[]> => {
+    const { data, error } = await supabase
+        .from(dbName)
+        .select(bookingSelect)
+        .gt("end_time", new Date().toISOString()) // end_time > NOW
+        .eq("equipment_id", equipment_id)
         .order("end_time", { ascending: true });
 
     if (error) throw error;
@@ -80,7 +115,7 @@ export const getActiveBookings = async (): Promise<Booking[]> => {
 export const createBooking = async (booking: NewBooking): Promise<Booking> => {
     const { data, error } = await supabase
         .from(dbName)
-        .insert(booking)
+        .insert({...booking, booker_id: booking.booker.id, equipments_id: booking.equipment.id})
         .single();
 
     if (error) throw error;
@@ -106,7 +141,7 @@ export const updateBooking = async (
 /**
  * Supprime une réservation
  */
-export const deleteBooking = async (id: number): Promise<void> => {
+export const deleteBooking = async (id: string): Promise<void> => {
     const { error } = await supabase
         .from(dbName)
         .delete()

@@ -46,7 +46,7 @@ export const updateProfil = async (updatedProfile: Profile): Promise<Profile> =>
 /**
  * Supprime un profil
  */
-export const deleteProfil = async (id: number): Promise<void> => {
+export const deleteProfil = async (id: string): Promise<void> => {
     const { error } = await supabase
         .from(dbName)
         .delete()
