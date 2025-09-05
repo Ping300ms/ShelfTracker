@@ -116,7 +116,7 @@ function CheckoutScreen() {
                 selectedProfile={selectedProfile}
                 onProfileChange={(value) =>
                     value === "create"
-                        ? navigate("/create-profile")
+                        ? navigate("/ShelfTracker/create-profile")
                         : setSelectedProfile(value)
                 }
                 startDate={startDate}
