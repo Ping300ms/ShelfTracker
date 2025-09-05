@@ -11,7 +11,14 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
         title: `${b.equipment.name} ${b.rent ? "loué" : "réservé"} par ${b.booker.name}`,
         start: new Date(b.start_time),
         end: new Date(b.end_time),
+        allDay: false,
     }));
+
+    if (bookings.length > 0)
+    {
+        console.log("start_time:", bookings[0].start_time, "parsed:", new Date(bookings[0].start_time));
+        console.log("end_time:", bookings[0].end_time, "parsed:", new Date(bookings[0].end_time));
+    }
 
     return (
         <div className="card">
@@ -23,6 +30,7 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
                     endAccessor="end"
                     defaultView={Views.MONTH}
                     className="booking-calendar__calendar"
+                    showMultiDayTimes={true}
                 />
             </div>
         </div>

@@ -74,15 +74,6 @@
     color: white;
 }
 
-/* Différencier les statuts */
-.rbc-event:has(span:contains("Loué")) {
-    background-color: #e74c3c; /* rouge */
-}
-
-.rbc-event:has(span:contains("Réservé")) {
-    background-color: #2ecc71; /* vert */
-}
-
 /* Vue mois : espacement des cases */
 .rbc-month-view {
     border-radius: 8px;
@@ -153,4 +144,24 @@
 .rbc-day-slot .rbc-time-slot,
 .rbc-time-content {
     border-top: 1px solid var(--tertiary-color);
+}
+
+.rbc-show-more {
+    border-radius: var(--radius);
+    padding: 4px;
+    background: none;
+    color: var(--success-color);
+}
+
+
+.rbc-event {
+    background-color: var(--success-color);
+    color: var(--secondary-text-color);
+    border-color: var(--tertiary-color);
+}
+
+.rbc-event.rbc-selected {
+    background-color: var(--primary-text-color);
+    color: var(--secondary-text-color);
+    border-color: var(--tertiary-color);
 }

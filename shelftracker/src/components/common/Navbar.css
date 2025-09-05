@@ -1,5 +1,6 @@
 /* src/styles/Navbar.css */
 .navbar__container {
+    z-index: 100000;
     position: fixed;
     bottom: 0;
     left: 0;
