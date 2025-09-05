@@ -11,7 +11,7 @@
 }
 
 #reader {
-    margin: 50%;
+    margin-top: 50%;
     width: 100%;
     max-width: 400px;
     aspect-ratio: 1 / 1; /* carré */
@@ -37,7 +37,6 @@
 
 .camera__equipment {
     width: 100%;
-    margin-top: 1rem;
     animation: fadeIn 0.3s ease-out;
 }
 
