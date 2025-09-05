@@ -3,6 +3,11 @@
     flex-direction: column;
 }
 
+.profile-selector__label {
+    display: flex;
+    flex-direction: column;
+}
+
 .profile-selector__select {
     display: flex;
     flex-direction: column;

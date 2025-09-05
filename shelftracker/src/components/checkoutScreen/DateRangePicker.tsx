@@ -17,7 +17,7 @@ export function DateRangePicker({
                                 }: DateRangePickerProps) {
     return (
         <div className="date-range-picker__container">
-            <label>
+            <label className="date-range-picker__label">
                 Début
                 <input
                     type="datetime-local"
@@ -28,7 +28,7 @@ export function DateRangePicker({
                 />
             </label>
 
-            <label>
+            <label className="date-range-picker__label">
                 Fin
                 <input
                     type="datetime-local"

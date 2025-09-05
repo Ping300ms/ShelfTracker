@@ -2,6 +2,7 @@ import type {NewProfile} from "../../types/Profile.ts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProfil } from "../../api/ProfilesApi.ts";
+import "./CreateProfileForm.css";
 
 function CreateProfileScreen() {
     const [name, setName] = useState("");
@@ -30,7 +31,7 @@ function CreateProfileScreen() {
 
     return (
             <form onSubmit={handleSubmit} className="card form-card">
-                <label className="form-label">
+                <label className="create-profile-form__label">
                     Nom
                     <input
                         type="text"

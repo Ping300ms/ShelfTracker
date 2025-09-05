@@ -16,7 +16,7 @@ export function EquipmentCreateForm({ form, loading, error, onChange, onSubmit }
             <form className="equipment-creation-form__container" onSubmit={onSubmit}>
                 {error && <p style={{ color: "red" }}>{error}</p>}
 
-                <label>
+                <label className="equipment-creation-form__label">
                     Nom
                     <input
                         className="input"
@@ -28,7 +28,7 @@ export function EquipmentCreateForm({ form, loading, error, onChange, onSubmit }
                     />
                 </label>
 
-                <label>
+                <label className="equipment-creation-form__label">
                     Type
                     <select
                         className="input"
@@ -44,7 +44,7 @@ export function EquipmentCreateForm({ form, loading, error, onChange, onSubmit }
                     </select>
                 </label>
 
-                <label>
+                <label className="equipment-creation-form__label">
                     Emplacement
                     <input
                         className="input"
@@ -55,7 +55,7 @@ export function EquipmentCreateForm({ form, loading, error, onChange, onSubmit }
                     />
                 </label>
 
-                <label>
+                <label className="equipment-creation-form__label">
                     Prix de location (€)
                     <input
                         className="input"
@@ -67,7 +67,7 @@ export function EquipmentCreateForm({ form, loading, error, onChange, onSubmit }
                     />
                 </label>
 
-                <label>
+                <label className="equipment-creation-form__label">
                     Note
                     <textarea
                         className="input"

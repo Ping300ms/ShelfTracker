@@ -3,8 +3,14 @@
     flex-direction: column;
 }
 
+.date-range-picker__label {
+    display: flex;
+    flex-direction: column;
+}
+
 .date-range-picker__input {
     display: flex;
+    flex: 1;
     flex-direction: column;
     padding: var(--padding);
     border-radius: var(--radius);

@@ -10,7 +10,7 @@ interface ProfileSelectorProps {
 export function ProfileSelector({ profiles, selectedProfile, onChange }: ProfileSelectorProps) {
     return (
         <div className="profile-selector__container">
-            <label>
+            <label className="profile-selector__label">
                 Profil
                 <select
                     value={selectedProfile}
