@@ -62,7 +62,7 @@ export const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment }) => {
                 className="equipment-card__add-btn"
                 onClick={handleClick}
             >
-                {addedToCard ? <IoRemove size={28} color="lightcoral" /> : <IoAdd size={28} color="lightgreen" />}
+                {addedToCard ? <IoRemove size={28} color="var(--error-color)" /> : <IoAdd size={28} color="var(--success-color)" />}
             </button>
         </div>
     );

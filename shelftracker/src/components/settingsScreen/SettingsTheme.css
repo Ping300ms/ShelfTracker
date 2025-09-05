@@ -1,0 +1,63 @@
+.settings-theme__card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin: var(--margin);
+    border-radius: var(--radius);
+    background: var(--tertiary-color);
+    box-shadow: var(--shadow);
+}
+
+.settings-theme__card h2 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    color: var(--primary-text-color);
+}
+
+/* Switch stylisé */
+.switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.switch input {
+    display: none; /* On cache la checkbox */
+}
+
+.slider {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: var(--secondary-color);
+    border-radius: 13px;
+    transition: background-color 0.3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 2px;
+    top: 2px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+.label-text {
+    color: var(--primary-text-color);
+    font-size: 1rem;
+}

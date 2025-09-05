@@ -22,10 +22,10 @@ export function EquipmentHeader({ equipment, addedToCart, onDelete, onToggleCart
                 </div>
                 <h2>{equipment?.name}</h2>
                 <button className="equipment-header__delete-btn" onClick={onDelete}>
-                    <IoTrashOutline size={24} color="lightcoral" />
+                    <IoTrashOutline size={24} color="var(--error-color)" />
                 </button>
                 <button className="equipment-header__add-btn" onClick={onToggleCart}>
-                    {addedToCart ? <IoRemove size={28} color="lightcoral" /> : <IoAdd size={28} color="lightgreen" />}
+                    {addedToCart ? <IoRemove size={28} color="var(--error-color)" /> : <IoAdd size={28} color="var(--success-color)" />}
                 </button>
             </div>
 
