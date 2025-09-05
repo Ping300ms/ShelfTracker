@@ -16,6 +16,7 @@ import "./global.css";
 import EquipmentCreateScreen from "./screens/EquipmentCreateScreen.tsx";
 import EquipmentEditScreen from "./screens/EquipmentEditScreen.tsx";
 import CreateProfileScreen from "./screens/CreateProfileScreen.tsx";
+import CalendarScreen from "./screens/CalendarScreen.tsx";
 
 export default function App() {
     return (
@@ -89,6 +90,13 @@ export default function App() {
                             <ProtectedRoute>
                                 <ProtectedLayout>
                                     <CreateProfileScreen />
+                                </ProtectedLayout>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/ShelfTracker/calendar" element={
+                            <ProtectedRoute>
+                                <ProtectedLayout>
+                                    <CalendarScreen />
                                 </ProtectedLayout>
                             </ProtectedRoute>
                         } />

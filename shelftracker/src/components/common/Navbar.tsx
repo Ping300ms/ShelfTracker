@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import {IoHome, IoQrCode, IoSettings} from "react-icons/io5";
+import {IoCalendar, IoHome, IoQrCode, IoSettings} from "react-icons/io5";
 import "./Navbar.css";
 
 function Navbar() {
@@ -22,6 +22,15 @@ function Navbar() {
                 }
             >
                 <IoQrCode size={24} />
+            </NavLink>
+
+            <NavLink
+                to="/ShelfTracker/calendar"
+                className={({ isActive }) =>
+                    isActive ? "navbar__item active" : "navbar__item"
+                }
+            >
+                <IoCalendar size={24} />
             </NavLink>
 
             <NavLink
