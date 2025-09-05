@@ -1,27 +1,27 @@
 import { supabase } from './SupabaseClient';
 import type { Booking, NewBooking } from "../types/Booking.ts";
 
-const dbName = "bookings";
+const dbName = "test_bookings";
 const bookingSelect = `
-  id,
-  rent,
-  start_time,
-  end_time,
-  created_at,
-  equipment: equipments (
     id,
-    name,
-    note,
-    rent_price,
-    location,
+    rent,
+    start_time,
+    end_time,
     created_at,
-    type
-  ),
-  booker: profiles (
-    id,
-    name
-  )
-`;
+    equipment:test_equipments (
+      id,
+      name,
+      note,
+      rent_price,
+      location,
+      created_at,
+      type
+    ),
+    booker:test_profiles (
+      id,
+      name
+    )
+  `;
 
 /**
  * Récupère toutes les réservations
@@ -102,7 +102,7 @@ export const getActiveBookingsByEquipment = async (equipment_id: string): Promis
         .from(dbName)
         .select(bookingSelect)
         .gt("end_time", new Date().toISOString()) // end_time > NOW
-        .eq("equipment_id", equipment_id)
+        .eq("equipment", equipment_id)
         .order("end_time", { ascending: true });
 
     if (error) throw error;
@@ -115,7 +115,7 @@ export const getActiveBookingsByEquipment = async (equipment_id: string): Promis
 export const createBooking = async (booking: NewBooking): Promise<Booking> => {
     const { data, error } = await supabase
         .from(dbName)
-        .insert({...booking, booker_id: booking.booker.id, equipments_id: booking.equipment.id})
+        .insert({...booking, booker: booking.booker.id, equipment: booking.equipment.id})
         .single();
 
     if (error) throw error;
@@ -130,7 +130,7 @@ export const updateBooking = async (
 ): Promise<Booking> => {
     const { data, error } = await supabase
         .from(dbName)
-        .update(updatedBooking)
+        .update({...updatedBooking, booker: updatedBooking.booker.id, equipment: updatedBooking.equipment.id})
         .eq('id', updatedBooking.id)
         .single();
 

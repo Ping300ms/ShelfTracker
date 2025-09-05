@@ -1,19 +1,18 @@
 import { supabase } from './SupabaseClient';
 import type {Equipment, NewEquipment} from '../types/Equipment.ts';
 
-const dbName = "equipments";
+const dbName = "test_equipments";
 
 /**
  * Récupère tous les équipements
  */
 export const getEquipments = async (): Promise<Equipment[]> => {
     const { data, error } = await supabase
-        .from("equipments")
+        .from(dbName)
         .select("*")
         .order("name", { ascending: true });
 
     if (error) throw error;
-    console.log(data);
     return data ?? [];
 };
 

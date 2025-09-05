@@ -8,7 +8,7 @@ import "./BookingCalendar.css";
 export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
     const events = bookings.map((b) => ({
         id: b.id,
-        title: b.rent ? "Loué" : "Réservé",
+        title: `${b.equipment.name} ${b.rent ? "loué" : "réservé"} par ${b.booker.name}`,
         start: new Date(b.start_time),
         end: new Date(b.end_time),
     }));
