@@ -1,7 +1,7 @@
 import { supabase } from './SupabaseClient';
 import type {Equipment, NewEquipment} from '../types/Equipment.ts';
 
-const dbName = "test_equipments";
+const dbName = "equipments";
 
 /**
  * Récupère tous les équipements

@@ -1,14 +1,14 @@
 import { supabase } from './SupabaseClient';
 import type { Booking, NewBooking } from "../types/Booking.ts";
 
-const dbName = "test_bookings";
+const dbName = "bookings";
 const bookingSelect = `
     id,
     rent,
     start_time,
     end_time,
     created_at,
-    equipment:test_equipments (
+    equipment:equipments (
       id,
       name,
       note,
@@ -17,7 +17,7 @@ const bookingSelect = `
       created_at,
       type
     ),
-    booker:test_profiles (
+    booker:profiles (
       id,
       name
     )

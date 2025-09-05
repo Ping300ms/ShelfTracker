@@ -1,7 +1,7 @@
 import { supabase } from './SupabaseClient';
 import type { Profile, NewProfile } from "../types/Profile.ts";
 
-const dbName = "test_profiles";
+const dbName = "profiles";
 
 /**
  * Récupère tous les profils
