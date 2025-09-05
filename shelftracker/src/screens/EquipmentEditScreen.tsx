@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import type { Equipment } from "../types/Equipment";
 import { Loader } from "../components/common/Loader";
 
-import { EquipmentEditHeader } from "../components/equipmentEditScreen/EquipmentEditHeader";
-import { EquipmentEditForm } from "../components/equipmentEditScreen/EquipmentEditForm";
+import { EquipmentHeader } from "../components/common/EquipmentHeader";
+import { EquipmentForm } from "../components/common/EquipmentForm";
 
 function EquipmentEditScreen() {
     const [equipment, setEquipment] = useState<Equipment | null>(null);
@@ -65,8 +65,8 @@ function EquipmentEditScreen() {
     return (
         <div>
             <TopBar title="Modifier un équipement" />
-            <EquipmentEditHeader equipment={equipment} onChange={handleChange} />
-            <EquipmentEditForm
+            <EquipmentHeader equipment={equipment} onChange={handleChange} />
+            <EquipmentForm
                 equipment={equipment}
                 saving={saving}
                 onChange={handleChange}

@@ -1,59 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TopBar from "../components/common/TopBar.tsx";
-import { createEquipment } from "../api/EquipmentsApi.ts";
-import type { NewEquipment } from "../types/Equipment.ts";
+import TopBar from "../components/common/TopBar";
+import { createEquipment } from "../api/EquipmentsApi";
+import type { NewEquipment } from "../types/Equipment";
 
-import { EquipmentCreateForm } from "../components/equipmentCreateScreen/EquipmentCreateForm.tsx";
+import { EquipmentHeader } from "../components/common/EquipmentHeader";
+import { EquipmentForm } from "../components/common/EquipmentForm";
 
 function EquipmentCreateScreen() {
     const navigate = useNavigate();
 
-    const [form, setForm] = useState<NewEquipment>({
+    const [equipment, setEquipment] = useState<NewEquipment>({
         name: "",
         note: "",
-        rent_price: 0,
         location: "",
         type: "Autre",
+        rent_price: 0,
     });
 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [saving, setSaving] = useState(false);
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) => {
-        const { name, value } = e.target;
-        setForm((prev) => ({
-            ...prev,
-            [name]: name === "rent_price" ? Number(value) : value,
-        }));
+    const handleChange = (field: keyof NewEquipment, value: string) => {
+        setEquipment((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
+    const handleSave = async () => {
+        setSaving(true);
         try {
-            await createEquipment(form);
+            await createEquipment(equipment);
             navigate("/ShelfTracker/");
         } catch (err) {
-            //@ts-expect-error wtf
-            setError(err.message);
+            console.error(err);
+            alert("Erreur lors de la création");
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
 
     return (
         <div>
-            <TopBar title="Création" />
-            <EquipmentCreateForm
-                form={form}
-                loading={loading}
-                error={error}
+            <TopBar title="Créer un équipement" />
+            <EquipmentHeader equipment={equipment} onChange={handleChange} />
+            <EquipmentForm
+                equipment={equipment}
+                saving={saving}
                 onChange={handleChange}
-                onSubmit={handleSubmit}
+                onSave={handleSave}
             />
         </div>
     );
