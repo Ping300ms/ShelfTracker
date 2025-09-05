@@ -14,9 +14,10 @@ interface EquipmentListProps {
     error: string | null;
     search: string;
     setSearch: (search: string) => void;
+    canAdd?: boolean;
 }
 
-export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch }) => {
+export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loading, error, search, setSearch, canAdd = true }) => {
     const [typeFilter, setTypeFilter] = useState<string>("Tous");
     const navigate = useNavigate();
 
@@ -44,9 +45,10 @@ export const EquipmentList: React.FC<EquipmentListProps> = ({ equipments, loadin
                 setTypeFilter={setTypeFilter}
             />
 
-            <div className="equipment-list__create-btn" onClick={() => navigate("/ShelfTracker/equipment/new")}>
-                <IoAdd size={28} />
-            </div>
+            {canAdd &&  <div className="equipment-list__create-btn" onClick={() => navigate("/ShelfTracker/equipment/new")}>
+                            <IoAdd size={28} />
+                        </div>}
+
 
             <div className="equipment-list__card-container">
                 {filteredEquipments.length > 0 ? (
